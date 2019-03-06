@@ -1,5 +1,5 @@
 {
-  "name": "NOIOJ-FE",
+  "name": "vue3.0-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.6.1",
     "js-cookie": "^2.2.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",

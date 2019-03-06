@@ -5,7 +5,7 @@ import store from './store';
 
 import './icons';
 
-import './styles/index.scss';
+import './styles/public.scss';
 
 Vue.config.productionTip = false;
 

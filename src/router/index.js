@@ -6,8 +6,8 @@ import Layout from '@/views/layout/Layout.vue';
 Vue.use(Router);
 
 const router = new Router({
-  // mode: 'history',
-  // base: process.env.BASE_URL,
+  mode: 'history',
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     // {
     //   path: '/',
@@ -31,8 +31,8 @@ const router = new Router({
       children: [
         {
           path: '/',
-          name: 'index',
-          component: () => import('@/views/welcome/index.vue'),
+          name: 'homepage',
+          component: () => import('@/views/homepage/index.vue'),
         },
       ],
     },

@@ -69,8 +69,9 @@ export default {
       .title{
         line-height: 60px;
         color:white;
-        font-size: 18px;
-        letter-spacing: 1.5px;
+        font-size: 19px;
+        letter-spacing: 3px;
+        font-weight: bold;
       }
       .QrCode{
         width: 25px;
@@ -103,7 +104,7 @@ export default {
     }
 
     .loginStatus{
-      width: 269px;
+      width: 284px;
       height: 60px;
     }
   }

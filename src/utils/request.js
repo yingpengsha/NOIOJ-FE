@@ -3,11 +3,12 @@
 import axios from 'axios';
 import router from 'vue-router';
 import store from '@/store';
+import { Message } from 'element-ui';
 import { getToken, removeToken } from '@/utils/auth';
 
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: 'http://192.168.10.108:8080', // TODO:修改成真实的后台地址
+  baseURL: 'http://192.168.10.105:8080',
   timeout: 5000, // 请求超时设置
 });
 
@@ -30,9 +31,14 @@ service.interceptors.response.use(
     // 正常返回请求
     // 如果需要请求成功后的判断也可以放到此处
     // 如伟哥的写法，1是成功，0是失败，则可以直接在此处判断
-    return Promise.resolve(response);
+    return response;
   },
   (error) => {
+    Message({
+      message: error.message,
+      type: 'error',
+      duration: 5 * 1000,
+    });
     if (error.response.status) {
       switch (error.response.status) {
         // 401: 未登录/token过期
@@ -43,10 +49,9 @@ service.interceptors.response.use(
           removeToken();
           // FIXME:修改 vuex 内的登录状态，请自行修改
           store.commit('SET_ISLOGIN', false);
-          // FIXME:跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面, 请自行修改
           setTimeout(() => {
             router.replace({
-              path: '/login',
+              name: 'login',
               query: {
                 redirect: router.currentRoute.fullPath,
               },
@@ -67,4 +72,4 @@ service.interceptors.response.use(
     return Promise.reject(error.response);
   },
 );
-export default axios;
+export default service;

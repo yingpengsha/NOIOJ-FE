@@ -28,12 +28,12 @@
       <router-view></router-view>
     </main>
 
-    <footer>
+    <!-- <footer>
       <main>
         <div class="logo"><svg-icon icon-class="NOI" class-name="icon" /></div>
         <span>&copy; 2019 信奥训练平台</span>
       </main>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
@@ -140,13 +140,14 @@ export default {
 
   main{
     width: 100%;
-    min-height:calc(100% - 60px - 100px);
+    height:calc(100% - 60px);
   }
 
   footer{
     width: 100%;
     height: 100px;
     text-align: center;
+    background: $grayBack;
     main{
       width: $mainWidth;
       margin: auto;

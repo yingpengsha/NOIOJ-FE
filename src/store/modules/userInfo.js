@@ -1,4 +1,3 @@
-// FIXME:该文件为示例文件，请及时修改或者删除
 import * as token from '@/utils/auth';
 import * as users from '@/api/users';
 
@@ -13,11 +12,14 @@ const login = {
   },
   actions: {
     login({ commit }, data) {
+      console.log('login');
       return new Promise((resolve) => {
         users.login(data.email, data.password)
           .then((res) => {
             switch (res.data.code) {
               case '0':
+                token.removeToken();
+                commit('SET_ISLOGIN', false);
                 resolve('0');
                 break;
               case '1':

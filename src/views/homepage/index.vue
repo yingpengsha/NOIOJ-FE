@@ -9,7 +9,7 @@
           <p>赶快让自己的名字出现在排行榜上吧！</p>
           <div class="buttonList">
             <el-button type="success" class="button">开始做题</el-button>
-            <div class="button register">注册加入平台</div>
+            <div class="button register" @click="handleToRegister">注册加入平台</div>
           </div>
         </div>
         <img src="@/assets/welcome-page/homepage.png" alt="homepage">
@@ -58,7 +58,12 @@
 
 <script>
 export default {
-  name: 'Welcome',
+  name: 'Homepage',
+  methods: {
+    handleToRegister() {
+      this.$router.push({ name: 'register' });
+    },
+  },
 };
 </script>
 

@@ -126,7 +126,8 @@ export default {
 
   .features{
     width: 100%;
-    margin: 20px 0;
+    padding: 20px 0;
+    background: white;
     main{
       .title{
         font-size: 32px;

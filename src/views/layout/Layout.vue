@@ -17,9 +17,13 @@
       </section>
 
       <section class="loginStatus">
-        <div class="login">
+        <div class="login" v-if="isLogin">
           <el-button type="primary" size="small" @click="handleToLogin()">登录</el-button>
           <el-button size="small" @click="handleToRegister()">注册</el-button>
+        </div>
+        <div class="user" v-else>
+          <div class="avator" @click="handleToUserIndex()"></div>
+          <i class="el-icon-arrow-down"></i>
         </div>
       </section>
     </header>
@@ -56,6 +60,9 @@ export default {
     },
     handleToRegister() {
       this.$router.push({ name: 'register' });
+    },
+    handleToUserIndex() {
+      this.$router.push({ name: 'userIndex' });
     },
   },
 };
@@ -135,18 +142,34 @@ export default {
         display: flex;
         justify-content: flex-end;
       }
+      .user{
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        color: white;
+        .avator{
+          width: 32px;
+          height: 32px;
+          background: white;
+          margin-right: 10px;
+          border-radius: 50%;
+        }
+      }
     }
   }
 
   main{
     width: 100%;
     min-height:calc(100% - 60px - 100px);
+    background: $grayBack;
   }
 
   footer{
     width: 100%;
     height: 100px;
     text-align: center;
+    background: $grayBack;
     main{
       width: $mainWidth;
       margin: auto;

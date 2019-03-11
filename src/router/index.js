@@ -41,6 +41,21 @@ const router = new Router({
       ],
     },
     {
+      path: '/user',
+      component: Layout,
+      redirect: '/user/index',
+      children: [
+        {
+          path: '/index',
+          name: 'userIndex',
+          meta: {
+            title: '个人主页',
+          },
+          component: () => import('@/views/user/index.vue'),
+        },
+      ],
+    },
+    {
       path: '/problems',
       component: Layout,
       redirect: '/problems/index',

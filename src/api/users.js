@@ -11,15 +11,11 @@ export function login(email, password) {
   });
 }
 
-export function register(email, password) {
+export function register(data) {
   return request({
     url: '/users/register',
     method: 'post',
-    data: {
-      email,
-      password,
-      name: email,
-    },
+    data,
   });
 }
 

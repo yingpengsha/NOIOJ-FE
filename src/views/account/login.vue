@@ -70,7 +70,7 @@ export default {
         ],
         password: [
           { validator: checkPassword },
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+          { required: true, message: '请输入密码', trigger: 'blur' },
         ],
       },
       isRight: true,

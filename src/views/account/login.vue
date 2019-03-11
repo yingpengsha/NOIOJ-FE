@@ -29,8 +29,9 @@
             <el-button type="primary" @click="submitForm('loginForm')" class="button">登录</el-button>
           </el-form-item>
         </el-form>
-        <div>
-          <el-button type="text" class="register" @click="handleToRegister()">用户注册</el-button>
+        <div style="text-align:center">
+          <span style="font-size:14px;color:#909399">还没有账号？</span>
+          <el-button type="text" class="register" @click="handleToRegister()">注册</el-button>
         </div>
         <div class="other">
           <p>第三方登录</p>
@@ -132,13 +133,13 @@ export default {
         width: 100%;
       }
       .register{
-        padding:0;
+        padding:5px;
       }
       .other{
         color: $fontThree;
         font-size:14px;
         text-align:center;
-        margin-top:40px;
+        margin-top:25px;
         .wechatIcon{
           height:25px;
           width:25px;

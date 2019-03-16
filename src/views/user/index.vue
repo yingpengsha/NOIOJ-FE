@@ -2,7 +2,7 @@
   <div id="userIndex">
     <main>
       <el-card class="avator" :body-style="{ padding: '0px' }">
-        <img src="https://avatars3.githubusercontent.com/u/37143265?s=400&u=018d8991e2ad6feb2cfb5f2c3013031308ddca7e&v=4" class="image">
+        <img :src="avator || defaultAvator" class="image">
         <div style="padding: 18px;">
           <p class="nick">yingpengsha</p>
           <p class="intro">这是一段签名这是一段签名这是一段签名这是一段签名</p>
@@ -14,7 +14,7 @@
             <svg-icon icon-class="school" class-name="icon" />
             <div class="detail">绍兴文理学院</div>
           </div>
-          <el-button class="button" plain>修改信息</el-button>
+          <el-button class="button" @click="handleToUserInfo()" plain>修改信息</el-button>
         </div>
       </el-card>
     </main>
@@ -22,8 +22,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import defaultAvator from '@/assets/public/avator.png';
+
 export default {
   name: 'userIndex',
+  data() {
+    return {
+      defaultAvator,
+    };
+  },
+  computed: {
+    ...mapGetters([
+      'isLogin',
+      'avator',
+    ]),
+  },
+  methods: {
+    handleToUserInfo() {
+      this.$router.push({ name: 'userInfo' });
+    },
+  },
 };
 </script>
 

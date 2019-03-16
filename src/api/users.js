@@ -21,27 +21,35 @@ export function register(data) {
 
 export function changePassword(oldPassword, newPassword) {
   return request({
-    url: '/users',
-    method: 'patch',
+    url: '/users/reset',
+    method: 'post',
     data: {
       password: oldPassword,
-      repassword: newPassword,
+      resetPassword: newPassword,
     },
   });
 }
 
 export function userInfo() {
   return request({
-    url: '/users',
+    url: '/users/info',
     method: 'get',
   });
 }
+
 
 export function updateUserInfo(info) {
   return request({
     url: '/users/modified',
     method: 'post',
     data: info,
+  });
+}
+
+export function userAvator() {
+  return request({
+    url: '/users/upload',
+    method: 'get',
   });
 }
 

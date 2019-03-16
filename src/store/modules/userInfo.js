@@ -4,14 +4,18 @@ import * as users from '@/api/users';
 const login = {
   state: {
     isLogin: !!token.getToken(),
+    avator: null,
   },
   mutations: {
     SET_ISLOGIN(state, isLogin) {
       state.isLogin = isLogin;
     },
+    SET_AVATOR(state, avator) {
+      state.avator = avator;
+    },
   },
   actions: {
-    login({ commit }, data) {
+    login({ dispatch, commit }, data) {
       console.log('login');
       return new Promise((resolve) => {
         users.login(data.email, data.password)
@@ -25,6 +29,7 @@ const login = {
               case '1':
                 token.setToken(res.data.token);
                 commit('SET_ISLOGIN', true);
+                dispatch('getAvator');
                 resolve('1');
                 break;
               default:
@@ -33,9 +38,22 @@ const login = {
           });
       });
     },
+    getAvator({ commit }) {
+      users.userAvator()
+        .then((result) => {
+          switch (result.data.code) {
+            case '1':
+              commit('SET_AVATOR', result.data.url);
+              break;
+            default:
+              break;
+          }
+        });
+    },
     logout({ commit }) {
       return new Promise((resolve) => {
         commit('SET_ISLOGIN', false);
+        commit('SET_AVATOR', null);
         token.removeToken();
         resolve();
       });

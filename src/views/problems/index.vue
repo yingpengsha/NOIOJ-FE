@@ -74,7 +74,8 @@ export default {
     }
   }
 
-  #mian{
+  #main{
+    background: white;
     main{
       .el-collapse-item__header{
         font-size: 20px;

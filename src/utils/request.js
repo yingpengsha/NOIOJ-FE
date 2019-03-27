@@ -8,7 +8,7 @@ import { getToken, removeToken } from '@/utils/auth';
 
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: 'http://192.168.10.105:8080',
+  baseURL: 'http://192.168.10.103:8080',
   timeout: 5000, // 请求超时设置
 });
 
@@ -33,6 +33,7 @@ service.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.error(error.response);
     Message({
       message: error.message,
       type: 'error',

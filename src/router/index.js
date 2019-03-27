@@ -26,6 +26,29 @@ const router = new Router({
       ],
     },
     {
+      path: '/questions',
+      component: Layout,
+      redirect: '/questions/index',
+      children: [
+        {
+          path: '/questions/index',
+          name: 'questions',
+          meta: {
+            title: '全部题目',
+          },
+          component: () => import('@/views/questions/index.vue'),
+        },
+        {
+          path: '/questions/package',
+          name: 'questionsPackage',
+          meta: {
+            title: '全部题包',
+          },
+          component: () => import('@/views/questions/package.vue'),
+        },
+      ],
+    },
+    {
       path: '/match',
       component: Layout,
       redirect: '/match/index',
@@ -34,9 +57,24 @@ const router = new Router({
           path: '/match/index',
           name: 'match',
           meta: {
-            title: '竞赛',
+            title: '公开竞赛',
           },
           component: () => import('@/views/match/index.vue'),
+        },
+      ],
+    },
+    {
+      path: '/ladder',
+      component: Layout,
+      redirect: '/ladder/index',
+      children: [
+        {
+          path: '/ladder/index',
+          name: 'ladder',
+          meta: {
+            title: '天梯竞技',
+          },
+          component: () => import('@/views/ladder/index.vue'),
         },
       ],
     },

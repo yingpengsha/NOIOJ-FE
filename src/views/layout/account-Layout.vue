@@ -8,9 +8,33 @@
         <svg-icon icon-class="QrCode" class-name="QrCode" />
       </section>
 
-      <section class="menuList">
-        <a>题库 <i class="el-icon-arrow-down"></i></a>
-        <router-link tag="a" to="/match">竞赛</router-link>
+     <section class="menuList">
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            题库<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item icon="el-icon-tickets" @click.native="handleToQuestions()">
+              全部题目
+            </el-dropdown-item>
+            <el-dropdown-item icon="el-icon-menu" @click.native="handleToPackage()">
+              全部题包
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            竞赛<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="handleToMatch()">
+              <svg-icon icon-class="match" class-name="menu-icon"></svg-icon> 公开竞赛
+            </el-dropdown-item>
+            <el-dropdown-item @click.native="handleToLadder()">
+              <svg-icon icon-class="battle" class-name="menu-icon"></svg-icon> 天梯竞技
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <router-link tag="a" to="/rank">排行榜</router-link>
         <router-link tag="a" to="/lesson">在线课程</router-link>
         <router-link tag="a" to="/problems">常见问题</router-link>
@@ -63,6 +87,18 @@ export default {
     },
     handleToUserIndex() {
       this.$router.push({ name: 'userIndex' });
+    },
+    handleToMatch() {
+      this.$router.push({ name: 'match' });
+    },
+    handleToLadder() {
+      this.$router.push({ name: 'ladder' });
+    },
+    handleToQuestions() {
+      this.$router.push({ name: 'questions' });
+    },
+    handleToPackage() {
+      this.$router.push({ name: 'questionsPackage' });
     },
   },
 };
@@ -124,9 +160,21 @@ export default {
       line-height: 60px;
       display: flex;
       justify-content:space-between;
+      .el-dropdown-link{
+        color: #888894;
+        transition: all .3s;
+        &:hover{
+          cursor: pointer;
+          color:white;
+        }
+      }
+      .menu-icon{
+        width:30px;
+        height: 30px;
+      }
       a{
         font-size: 15px;
-        color:$grayBack;
+        color:#888894;
         transition: all .3s;
         &:hover{
           color: white;

@@ -9,12 +9,12 @@
       </section>
 
       <section class="menuList">
-        <el-dropdown>
+        <el-dropdown trigger="click">
           <span class="el-dropdown-link">
             题库<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-tickets" @click.native="handleToQuestions()">
+            <el-dropdown-item icon="el-icon-tickets" @click.native="handleToProblem()">
               全部题目
             </el-dropdown-item>
             <el-dropdown-item icon="el-icon-menu" @click.native="handleToPackage()">
@@ -22,7 +22,7 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-dropdown>
+        <el-dropdown trigger="click">
           <span class="el-dropdown-link">
             竞赛<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
@@ -37,7 +37,7 @@
         </el-dropdown>
         <router-link tag="a" to="/rank">排行榜</router-link>
         <router-link tag="a" to="/lesson">在线课程</router-link>
-        <router-link tag="a" to="/problems">常见问题</router-link>
+        <router-link tag="a" to="/questions">常见问题</router-link>
       </section>
 
       <section class="loginStatus">
@@ -101,11 +101,11 @@ export default {
     handleToLadder() {
       this.$router.push({ name: 'ladder' });
     },
-    handleToQuestions() {
-      this.$router.push({ name: 'questions' });
+    handleToProblem() {
+      this.$router.push({ name: 'problem' });
     },
     handleToPackage() {
-      this.$router.push({ name: 'questionsPackage' });
+      this.$router.push({ name: 'problemPackage' });
     },
   },
 };

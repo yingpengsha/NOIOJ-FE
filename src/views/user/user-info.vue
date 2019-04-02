@@ -3,9 +3,25 @@
     <main>
       <div class="nav">
         <el-card class="avator" :body-style="{ padding: '0px' }">
-          <img :src="avator || defaultAvator" width="250px" height="250px">
+          <img
+            :src="avator || defaultAvator"
+            width="250px"
+            height="250px"
+          >
           <div style="padding: 15px;">
-            <el-button class="button" @click="handleToUserInfo()" plain>修改头像</el-button>
+            <el-button class="button" @click="handleToOpenAvator()" plain>修改头像</el-button>
+            <img-upload
+              field="file"
+              @srcFileSet="srcFileSet"
+              @crop-upload-success="cropUploadSuccess"
+              @crop-success="onSubmit"
+              v-model="show"
+              :width="300"
+              :height="300"
+              :url="`${API_ROOT}/users/upload`"
+              :headers="headers"
+              img-format="png">
+            </img-upload>
           </div>
         </el-card>
         <el-card class="menu" :body-style="{ padding: '0px' }">
@@ -41,20 +57,31 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import ImgUpload from 'vue-image-crop-upload/upload-2.vue';
 import defaultAvator from '@/assets/public/avator.png';
+import { getToken } from '@/utils/auth';
+import { API_ROOT } from '@/utils/request';
 
 export default {
   name: 'UserInfo',
   data() {
     return {
+      show: false,
+      API_ROOT,
       defaultAvator,
       menuList: [
         { name: '个人档案', route: '/user/info/basic', icon: 'person' },
         { name: '积分管理', route: '/user/info/basic', icon: 'integral' },
         { name: '提交记录', route: '/user/info/basic', icon: 'submit' },
       ],
+      headers: {
+        'X-Token': getToken(),
+      },
       focusItem: '个人档案',
     };
+  },
+  components: {
+    ImgUpload,
   },
   computed: {
     ...mapGetters([
@@ -65,6 +92,19 @@ export default {
   methods: {
     handleToChangeTitle(name) {
       this.focusItem = name;
+    },
+    handleToOpenAvator() {
+      this.show = true;
+    },
+    cropUploadSuccess() {
+      this.$store.commit('SET_AVATOR', null);
+      this.$router.go(0);
+    },
+    onSubmit(imageDataUrl, field) {
+      console.log(imageDataUrl, field);
+    },
+    srcFileSet(fileName, fileType, fileSize) {
+      console.log(fileName, fileType, fileSize);
     },
   },
 };

@@ -20,14 +20,14 @@ const login = {
       return new Promise((resolve) => {
         users.login(data.email, data.password)
           .then((res) => {
-            switch (res.data.code) {
+            switch (res.code) {
               case '0':
                 token.removeToken();
                 commit('SET_ISLOGIN', false);
                 resolve('0');
                 break;
               case '1':
-                token.setToken(res.data.token);
+                token.setToken(res.token);
                 commit('SET_ISLOGIN', true);
                 dispatch('getAvator');
                 resolve('1');
@@ -41,9 +41,9 @@ const login = {
     getAvator({ commit }) {
       users.userAvator()
         .then((result) => {
-          switch (result.data.code) {
+          switch (result.code) {
             case '1':
-              commit('SET_AVATOR', result.data.url);
+              commit('SET_AVATOR', result.url);
               break;
             default:
               break;

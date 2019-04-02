@@ -32,7 +32,7 @@ export default {
     getData() {
       users.userInfo()
         .then((result) => {
-          this.userInfo = result.data.data;
+          this.userInfo = result.data;
         });
     },
   },

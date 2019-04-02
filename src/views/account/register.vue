@@ -113,7 +113,7 @@ export default {
         if (valid) {
           await users.register(this.registerForm)
             .then((result) => {
-              switch (result.data.code) {
+              switch (result.code) {
                 case '0':
                   this.$refs[formName].resetFields();
                   this.$message.error('该邮箱已被注册！');

@@ -81,17 +81,15 @@ module.exports = {
     port: 8080,
     https: false,
     hotOnly: false,
-    // proxy: {
-    //  // 设置代理
-    //  // proxy all requests starting with /api to jsonplaceholder
-    //  'http://localhost:8080/': {
-    //      target: 'http://baidu.com:8080', //真实请求的目标地址
-    //      changeOrigin: true,
-    //      pathRewrite: {
-    //          '^http://localhost:8080/': ''
-    //      }
-    //  }
-    // },
+    proxy: {
+      '/api': {
+        target: 'http://192.168.10.112:9999',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '',
+        },
+      },
+    },
     before: (app) => {},
   },
   // 第三方插件配置

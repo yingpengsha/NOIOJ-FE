@@ -26,25 +26,25 @@ const router = new Router({
       ],
     },
     {
-      path: '/questions',
+      path: '/problem',
       component: Layout,
-      redirect: '/questions/index',
+      redirect: '/problem/index',
       children: [
         {
-          path: '/questions/index',
-          name: 'questions',
+          path: '/problem/index',
+          name: 'problem',
           meta: {
             title: '全部题目',
           },
-          component: () => import('@/views/questions/index.vue'),
+          component: () => import('@/views/problem/index.vue'),
         },
         {
-          path: '/questions/package',
-          name: 'questionsPackage',
+          path: '/problem/package',
+          name: 'problemPackage',
           meta: {
             title: '全部题包',
           },
-          component: () => import('@/views/questions/package.vue'),
+          component: () => import('@/views/problem/package.vue'),
         },
       ],
     },
@@ -144,17 +144,17 @@ const router = new Router({
       ],
     },
     {
-      path: '/problems',
+      path: '/questions',
       component: Layout,
-      redirect: '/problems/index',
+      redirect: '/questions/index',
       children: [
         {
-          path: '/problems/index',
-          name: 'problems',
+          path: '/questions/index',
+          name: 'questions',
           meta: {
             title: '常见问题',
           },
-          component: () => import('@/views/problems/index.vue'),
+          component: () => import('@/views/questions/index.vue'),
         },
       ],
     },

@@ -6,9 +6,11 @@ import store from '@/store';
 import { Message } from 'element-ui';
 import { getToken, removeToken } from '@/utils/auth';
 
+export const API_ROOT = 'http://192.168.10.112:9999';
+
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: 'http://192.168.10.103:8080',
+  baseURL: API_ROOT,
   timeout: 5000, // 请求超时设置
 });
 
@@ -30,7 +32,7 @@ service.interceptors.response.use(
     // 正常返回请求
     // 如果需要请求成功后的判断也可以放到此处
     // 如伟哥的写法，1是成功，0是失败，则可以直接在此处判断
-    return response;
+    return response.data;
   },
   (error) => {
     console.error(error.response);

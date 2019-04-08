@@ -70,6 +70,9 @@ export const problemList = {
       this.listQuery.tags = list;
       this.getList();
     },
+    handleToProblemDetail(row) {
+      console.log(row);
+    },
   },
   filters: {
     tagStyle(difficulty) {

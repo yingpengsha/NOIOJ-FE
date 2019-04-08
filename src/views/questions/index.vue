@@ -1,6 +1,7 @@
 <template>
   <div id="questions">
     <section id="header">
+      <div class="img"/>
       <main>
         常见问题及解答
       </main>
@@ -60,17 +61,25 @@ export default {
   #header{
     width:100%;
     height: 375px;
-    background: gray;
-    background: url('../../assets/questions-page/questions-background.png');
-    background-position: center;
-    background-size: cover;
-    filter: grayscale(0.7);
+    position: relative;
+    .img{
+      width:100%;
+      height: 375px;
+      background: url('../../assets/questions-page/questions-background.png');
+      background-position: center;
+      background-size: cover;
+      filter:brightness(0.5);
+      position:absolute;
+      top: 0;
+      left: 0;
+    }
     main{
       text-align: center;
       line-height: 315px;
       font-size: 48px;
       letter-spacing: 5px;
       color: white;
+      position: relative;
     }
   }
 

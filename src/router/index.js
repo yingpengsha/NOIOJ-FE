@@ -39,12 +39,20 @@ const router = new Router({
           component: () => import('@/views/problem/index.vue'),
         },
         {
+          path: '/problem/detail/:id',
+          name: 'problemDetail',
+          meta: {
+            title: '题目详情',
+          },
+          component: () => import('@/views/problem/detail/index.vue'),
+        },
+        {
           path: '/problem/package',
           name: 'problemPackage',
           meta: {
             title: '全部题包',
           },
-          component: () => import('@/views/problem/package.vue'),
+          component: () => import('@/views/problem/package/index.vue'),
         },
       ],
     },

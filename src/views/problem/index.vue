@@ -76,6 +76,7 @@
       <el-card class="box-card" v-loading="listLoading">
         <el-table
           :data="list"
+          @row-click="handleToProblemDetail"
           stripe
           style="width: 100%">
           <el-table-column

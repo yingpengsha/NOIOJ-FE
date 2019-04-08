@@ -2,7 +2,7 @@
   <div id="basicInfo">
     <div class="infoItem" v-for="(item,key) in 8" :key="key">
       <div class="title">昵称</div>
-      <detail>昵称</detail>
+      <div class="detail">昵称</div>
       <el-button type="text">修改</el-button>
     </div>
   </div>
@@ -32,6 +32,7 @@ export default {
     getData() {
       users.userInfo()
         .then((result) => {
+          console.log(result.data);
           this.userInfo = result.data;
         });
     },
@@ -56,7 +57,7 @@ export default {
     .title{
       width: 200px;
     }
-    detail{
+    .detail{
       font-size:14px;
       width: 100%;
       line-height: 20px;

@@ -13,6 +13,7 @@ module.exports = {
 
     'no-param-reassign': 'off',
     'import/prefer-default-export': 'off',
+    'max-len': ["error", { "code": 150}],
   },
   parserOptions: {
     parser: 'babel-eslint',

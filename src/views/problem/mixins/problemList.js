@@ -71,7 +71,7 @@ export const problemList = {
       this.getList();
     },
     handleToProblemDetail(row) {
-      console.log(row);
+      this.$router.push({ name: 'problemDetail', params: { id: row.problemId } });
     },
   },
   filters: {

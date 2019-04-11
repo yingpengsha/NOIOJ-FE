@@ -80,10 +80,17 @@
           stripe
           style="width: 100%">
           <el-table-column
+            align="center"
+            width="40">
+            <template slot-scope="scope">
+              <svg-icon v-if="scope.row.result === 4" icon-class="finished" class-name="finished" />
+            </template>
+          </el-table-column>
+          <el-table-column
             prop="difficulty"
             label="难度"
             align="center"
-            width="120">
+            width="100">
             <template slot-scope="scope">
               <div :style="difficulty[scope.row.difficulty] | tagStyle" class="tag">
                 {{difficulty[scope.row.difficulty]}}
@@ -210,6 +217,12 @@ export default {
   #problemList{
     width: calc(100% - 380px);
     min-height: 300px;
+    .finished{
+      width: 20px;
+      height: 20px;
+      margin-left: 5px;
+      padding-top:3px;
+    }
     .line{
       width:100%;
       height:1px;

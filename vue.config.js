@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const path = require('path');
 const cpus = require('os').cpus().length;
 
@@ -51,6 +52,11 @@ module.exports = {
         },
       },
     });
+    return {
+      plugins: [
+        new MonacoWebpackPlugin(),
+      ],
+    };
   },
 
   productionSourceMap: false, // 生产环境是否生成 sourceMap 文件

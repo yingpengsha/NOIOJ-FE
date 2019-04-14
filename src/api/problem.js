@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
 export function query({
-  limit, page, title, tags, difficulty, type, isFree,
+  limit, page, title, tags, difficulty, type, isFree, orderBy,
 }) {
   return request({
     url: '/problem/list',
@@ -14,6 +14,7 @@ export function query({
       difficulty,
       type,
       isFree,
+      orderBy,
     },
   });
 }
@@ -45,7 +46,6 @@ export function update(data) {
 }
 
 export function deleteById(id) {
-  console.log(id);
   return request({
     url: '/problem',
     method: 'delete',

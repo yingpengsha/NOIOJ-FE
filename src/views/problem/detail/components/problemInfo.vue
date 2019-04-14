@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .problemInfo{
-  height: calc(100vh - 120px - 80px - 40px - 15px);
+  height: calc(100vh - 120px - 40px - 40px - 15px);
   width: 100%;
   padding: 0 10px;
   overflow:scroll;

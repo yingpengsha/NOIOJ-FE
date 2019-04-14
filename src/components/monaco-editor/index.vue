@@ -10,13 +10,15 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button type="primary" size="small" style="height:36px;">提交代码</el-button>
+      <el-button type="primary" size="small" style="height:36px;" @click="onSubmit">提交代码</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import * as monaco from 'monaco-editor';
+import * as solution from '@/api/solution';
+import * as utils from '@/utils';
 
 export default {
   name: 'Editor',
@@ -56,16 +58,49 @@ export default {
       theme: 'vs',
       codesCopy: null, // 内容备份
       options: [
-        { value: 'c', name: 'C' },
-        { value: 'cpp', name: 'C++' },
-        { value: 'java', name: 'Java' },
+        { value: 'c', name: 'C', id: 0 },
+        { value: 'cpp', name: 'C++', id: 1 },
+        { value: 'java', name: 'Java', id: 3 },
       ],
+      languageList: {
+        c: 0,
+        cpp: 1,
+        java: 3,
+      },
+      form: {
+        problemId: 0,
+        inDate: '',
+        language: '',
+        source: '',
+      },
     };
   },
   methods: {
+    onSubmit() {
+      this.form = {
+        problemId: this.problemId,
+        inDate: utils.parseTime(new Date()),
+        language: this.languageList[this.language],
+        source: this.monacoEditor.getValue(),
+      };
+      solution.upload(this.form)
+        .then((result) => {
+          if (result.code === 1) {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+            });
+            this.$emit('onSubmit');
+          } else {
+            this.$message({
+              message: '提交失败',
+              type: 'warning',
+            });
+          }
+        });
+    },
     initEditor() {
       const self = this;
-      self.$refs.container.innerHTML = '';
       self.monacoEditor = monaco.editor.create(self.$refs.container, {
         value: self.codesCopy || self.codes,
         language: self.language,

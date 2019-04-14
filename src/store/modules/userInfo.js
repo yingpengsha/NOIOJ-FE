@@ -16,7 +16,6 @@ const login = {
   },
   actions: {
     login({ dispatch, commit }, data) {
-      console.log('login');
       return new Promise((resolve) => {
         users.login(data.email, data.password)
           .then((res) => {

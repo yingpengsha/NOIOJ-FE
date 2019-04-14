@@ -94,7 +94,7 @@ export default {
           }
           return true;
         }
-        console.log('error submit!!');
+        console.error('error submit!!');
         return false;
       });
     },

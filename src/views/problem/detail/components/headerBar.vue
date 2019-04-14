@@ -11,7 +11,7 @@
     <div class="submitRate">
       <div class="item">
         <div class="itemTitle">通过次数</div>
-        <div class="itemDetail">{{problem.solved}}</div>
+        <div class="itemDetail">{{problem.accepted}}</div>
       </div>
 
       <div class="item">

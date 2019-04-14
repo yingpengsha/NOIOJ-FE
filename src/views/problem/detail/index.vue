@@ -4,7 +4,7 @@
 
     <main>
       <div class="detail">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName">
           <el-tab-pane name="first">
             <span slot="label"><svg-icon icon-class="detail"></svg-icon> 题目详情</span>
             <problem-info :problem="problem"/>
@@ -15,12 +15,12 @@
           </el-tab-pane>
           <el-tab-pane name="third">
             <span slot="label"><svg-icon icon-class="ago"></svg-icon> 提交记录</span>
-            <submit-record />
+            <submit-record :problem="problem.problemId" ref="SubmitRecord"/>
           </el-tab-pane>
         </el-tabs>
       </div>
       <div class="editor">
-        <editor />
+        <editor :problemId="problem.problemId" @onSubmit="onSubmit"/>
       </div>
     </main>
 
@@ -56,6 +56,10 @@ export default {
     },
   },
   methods: {
+    onSubmit() {
+      this.activeName = 'third';
+      this.$refs.SubmitRecord.refresh();
+    },
     handleToControlLeft() {
       if (this.leftList) {
         this.$refs.openButton.style.left = '0px';

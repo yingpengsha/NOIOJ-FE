@@ -1,9 +1,10 @@
 <template>
   <div id="rank">
     <section id="bk1">
-      <div class="title">
+      <div class="img"/>
+      <main>
         🎉排行榜🎉
-      </div>
+      </main>
     </section>
 
     <section id="rankList">
@@ -168,13 +169,25 @@ export default {
   #bk1{
     width:100%;
     height: 400px;
-    background: $blue;
-    .title{
+    position: relative;
+    .img{
+      width:100%;
+      height: 400px;
+      background: url('../../assets/rank-page/rank-back.jpg');
+      background-position: center;
+      background-size: cover;
+      filter:brightness(0.5);
+      position:absolute;
+      top: 0;
+      left: 0;
+    }
+    main{
       text-align: center;
       padding-top: 130px;
       font-size: 68px;
       color: white;
-      letter-spacing: 20px
+      letter-spacing: 20px;
+      position: relative;
     }
   }
   #rankList{

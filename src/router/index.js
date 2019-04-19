@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 import Layout from '@/views/layout/Layout.vue';
 import accountLayout from '@/views/layout/account-Layout.vue';
 
@@ -44,7 +45,15 @@ const router = new Router({
           meta: {
             title: '全部题包',
           },
-          component: () => import('@/views/problem/package/index.vue'),
+          component: () => import('@/views/package/index.vue'),
+        },
+        {
+          path: '/problem/package/detail/:id',
+          name: 'problemPackageDetail',
+          meta: {
+            title: '题包详情',
+          },
+          component: () => import('@/views/package/detail.vue'),
         },
       ],
     },
@@ -143,7 +152,7 @@ const router = new Router({
           meta: {
             title: '个人档案',
           },
-          component: () => import('@/views/user/user-info.vue'),
+          component: () => import('@/views/user/infoDetail/index.vue'),
           children: [
             {
               path: '/user/info/basic',
@@ -151,7 +160,23 @@ const router = new Router({
               meta: {
                 title: '个人档案',
               },
-              component: () => import('@/views/user/user-info-basic.vue'),
+              component: () => import('@/views/user/infoDetail/userInfo.vue'),
+            },
+            {
+              path: '/user/info/wallet',
+              name: 'wallet',
+              meta: {
+                title: '钱包管理',
+              },
+              component: () => import('@/views/user/infoDetail/wallet.vue'),
+            },
+            {
+              path: '/user/info/submitLog',
+              name: 'submitLog',
+              meta: {
+                title: '提交记录',
+              },
+              component: () => import('@/views/user/infoDetail/submitLog.vue'),
             },
           ],
         },
@@ -198,10 +223,19 @@ const router = new Router({
   ],
 });
 
+NProgress.configure({
+  easing: 'ease', // 动画方式
+  speed: 500, // 递增进度条的速度
+  showSpinner: false, // 是否显示加载ico
+  trickleSpeed: 200, // 自动递增间隔
+  minimum: 0.3, // 初始化时的最小百分比
+});
+
 /**
  * 路由前置检查
  */
 router.beforeEach((to, from, next) => {
+  NProgress.start();
   document.title = to.meta.title;
   // 合法性校验
   if (to.meta.auth) {
@@ -212,6 +246,7 @@ router.beforeEach((to, from, next) => {
 });
 router.afterEach(() => {
   // 在即将进入新的页面组件前操作
+  NProgress.done();
 });
 
 export default router;

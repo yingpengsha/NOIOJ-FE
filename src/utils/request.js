@@ -6,7 +6,7 @@ import store from '@/store';
 import { Message } from 'element-ui';
 import { getToken, removeToken } from '@/utils/auth';
 
-export const API_ROOT = 'http://192.168.10.112:9999';
+export const API_ROOT = 'http://47.100.24.46:8080';
 
 // 创建一个 axios 实例
 const service = axios.create({

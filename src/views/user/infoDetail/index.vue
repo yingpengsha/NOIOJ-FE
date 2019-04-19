@@ -71,13 +71,12 @@ export default {
       defaultAvator,
       menuList: [
         { name: '个人档案', route: '/user/info/basic', icon: 'person' },
-        { name: '积分管理', route: '/user/info/basic', icon: 'integral' },
-        { name: '提交记录', route: '/user/info/basic', icon: 'submit' },
+        { name: '钱包管理', route: '/user/info/wallet', icon: 'integral' },
+        { name: '提交记录', route: '/user/info/submitLog', icon: 'submit' },
       ],
       headers: {
         'X-Token': getToken(),
       },
-      focusItem: '个人档案',
     };
   },
   components: {
@@ -88,6 +87,9 @@ export default {
       'isLogin',
       'avator',
     ]),
+    focusItem() {
+      return this.$route.meta.title;
+    },
   },
   methods: {
     handleToChangeTitle(name) {

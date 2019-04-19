@@ -12,6 +12,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     'no-param-reassign': 'off',
+    'no-restricted-syntax': 0,
+    'no-prototype-builtins':0,
     'import/prefer-default-export': 'off',
     'max-len': ["error", { "code": 150}],
   },

@@ -4,15 +4,15 @@
       <el-card class="avator" :body-style="{ padding: '0px' }">
         <img :src="avator || defaultAvator" class="image">
         <div style="padding: 18px;">
-          <p class="nick">yingpengsha</p>
-          <p class="intro">这是一段签名这是一段签名这是一段签名这是一段签名</p>
+          <p class="nick">{{userInfo.nick}}</p>
+          <p class="intro">{{userInfo.introduce}}</p>
           <div class="item">
             <svg-icon icon-class="email" class-name="icon" />
-            <div class="detail">810998652@qq.com</div>
+            <div class="detail">{{userInfo.email}}</div>
           </div>
           <div class="item">
             <svg-icon icon-class="school" class-name="icon" />
-            <div class="detail">绍兴文理学院</div>
+            <div class="detail">{{userInfo.school}}</div>
           </div>
           <el-button class="button" @click="handleToUserInfo()" plain>修改信息</el-button>
         </div>
@@ -23,6 +23,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import * as users from '@/api/users';
 import defaultAvator from '@/assets/public/avator.png';
 
 export default {
@@ -30,6 +31,17 @@ export default {
   data() {
     return {
       defaultAvator,
+      userInfo: {
+        nick: '',
+        introduce: '',
+        sex: '',
+        birthday: null,
+        school: '',
+        email: '',
+        province: '',
+        city: '',
+        experience: '',
+      },
     };
   },
   computed: {
@@ -39,9 +51,19 @@ export default {
     ]),
   },
   methods: {
+    getData() {
+      users.userInfo()
+        .then((result) => {
+          console.log(result.data);
+          this.userInfo = result.data;
+        });
+    },
     handleToUserInfo() {
       this.$router.push({ name: 'userInfo' });
     },
+  },
+  created() {
+    this.getData();
   },
 };
 </script>

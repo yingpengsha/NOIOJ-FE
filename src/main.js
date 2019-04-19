@@ -13,6 +13,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './styles/element-variables.scss';
 import 'mavon-editor/dist/css/index.css';
 
+
 Vue.use(Element);
 Vue.use(mavonEditor);
 

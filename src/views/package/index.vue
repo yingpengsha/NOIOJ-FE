@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     hanldToPackageDetail(id) {
-      this.$router.push({ name: 'problemDetail', params: { id } });
+      this.$router.push({ name: 'problemPackageDetail', params: { id } });
     },
     handleFilter() {
       this.listQuery.page = 1;

@@ -91,13 +91,15 @@
 </template>
 
 <script>
+import * as rank from '@/api/rank';
+
 export default {
   name: 'rank',
   data() {
     return {
-      loading: false,
-      list: null,
-      total: null,
+      loading: true,
+      list: [],
+      total: 0,
       listQuery: {
         nick: '',
         school: '',
@@ -138,6 +140,19 @@ export default {
     formatter(row) {
       return row.address;
     },
+    getList() {
+      this.loading = true;
+      rank.query()
+        .then((result) => {
+          if (result.code === 1) {
+            this.list = result.data.list;
+            this.list = false;
+          }
+        });
+    },
+  },
+  created() {
+    this.getList();
   },
 };
 </script>

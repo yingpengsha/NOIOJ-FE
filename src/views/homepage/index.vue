@@ -22,33 +22,29 @@
         <div class="feature">
           <svg-icon icon-class="code" class-name="icon" />
           <div class="detail">
-            <h1>练习</h1>
-            <p>LintCode领扣上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。
-              完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础</p>
+            <h1>{{code.title}}</h1>
+            <p>{{code.info}}</p>
           </div>
         </div>
         <div class="feature">
           <svg-icon icon-class="team" class-name="icon" />
           <div class="detail">
-            <h1>讨论</h1>
-            <p>LintCode领扣上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。
-              完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础</p>
+            <h1>{{team.title}}</h1>
+            <p>{{team.info}}</p>
           </div>
         </div>
         <div class="feature">
           <svg-icon icon-class="champion" class-name="icon" />
           <div class="detail">
-            <h1>竞赛</h1>
-            <p>LintCode领扣上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。
-              完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础</p>
+            <h1>{{champion.title}}</h1>
+            <p>{{champion.info}}</p>
           </div>
         </div>
         <div class="feature">
           <svg-icon icon-class="class" class-name="icon" />
           <div class="detail">
-            <h1>课程</h1>
-            <p>LintCode领扣上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。
-              完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础</p>
+            <h1>{{test.title}}</h1>
+            <p>{{test.info}}</p>
           </div>
         </div>
       </main>
@@ -63,6 +59,26 @@ export default {
     handleToRegister() {
       this.$router.push({ name: 'register' });
     },
+  },
+  data() {
+    return {
+      code: {
+        title: '练习',
+        info: '信奥训练平台上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。 完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础',
+      },
+      team: {
+        title: '讨论',
+        info: '信奥训练平台上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。 完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础',
+      },
+      champion: {
+        title: '竞赛',
+        info: '信奥训练平台上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。 完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础',
+      },
+      test: {
+        title: '课程',
+        info: '信奥训练平台上有数量超过1000道的算法题目和人工智能题目，通过刷题熟练掌握数据结构和算法。 完成各大名企的阶梯训练，为你斩获心仪的offer打下坚实的基础',
+      },
+    };
   },
 };
 </script>

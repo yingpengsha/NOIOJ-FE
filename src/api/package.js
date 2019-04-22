@@ -1,5 +1,13 @@
 import request from '@/utils/request';
 
+export function isHaveToBuy(id) {
+  return request({
+    url: '/packet',
+    method: 'get',
+    params: { id },
+  });
+}
+
 export function query({
   limit, page, title, originClass, userId, status,
 }) {

@@ -36,7 +36,7 @@
 
           <el-table
             v-loading="loading"
-            :data="tableData"
+            :data="list"
             style="width: 100%"
             stripe
             :default-sort = "{prop: 'date', order: 'descending'}"
@@ -109,32 +109,6 @@ export default {
         orderBy: 'solved',
         desc: 'desc',
       },
-      tableData: [{
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }, {
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }, {
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }, {
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }],
-
     };
   },
   methods: {

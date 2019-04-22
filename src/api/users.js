@@ -11,6 +11,14 @@ export function login(email, password) {
   });
 }
 
+export function queryById(id) {
+  return request({
+    url: '/users/detail',
+    method: 'get',
+    params: { id },
+  });
+}
+
 export function register(data) {
   return request({
     url: '/users/register',

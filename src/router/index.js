@@ -4,6 +4,9 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Layout from '@/views/layout/Layout.vue';
 import accountLayout from '@/views/layout/account-Layout.vue';
+import store from '@/store';
+import * as problem from '@/api/problem';
+import { Message } from 'element-ui';
 
 Vue.use(Router);
 
@@ -65,6 +68,7 @@ const router = new Router({
           path: '/problem/solve/detail/:id',
           name: 'problemDetail',
           meta: {
+            auth: true,
             title: '题目详情',
           },
           component: () => import('@/views/problem/detail/index.vue'),
@@ -150,6 +154,7 @@ const router = new Router({
           name: 'userInfo',
           redirect: '/user/info/basic',
           meta: {
+            auth: true,
             title: '个人档案',
           },
           component: () => import('@/views/user/infoDetail/index.vue'),
@@ -158,6 +163,7 @@ const router = new Router({
               path: '/user/info/basic',
               name: 'userBasicInfo',
               meta: {
+                auth: true,
                 title: '个人档案',
               },
               component: () => import('@/views/user/infoDetail/userInfo.vue'),
@@ -166,6 +172,7 @@ const router = new Router({
               path: '/user/info/wallet',
               name: 'wallet',
               meta: {
+                auth: true,
                 title: '钱包管理',
               },
               component: () => import('@/views/user/infoDetail/wallet.vue'),
@@ -174,6 +181,7 @@ const router = new Router({
               path: '/user/info/submitLog',
               name: 'submitLog',
               meta: {
+                auth: true,
                 title: '提交记录',
               },
               component: () => import('@/views/user/infoDetail/submitLog.vue'),
@@ -198,6 +206,22 @@ const router = new Router({
       ],
     },
     {
+      path: '/shopping',
+      component: Layout,
+      redirect: '/shopping/index',
+      children: [
+        {
+          path: '/shopping/index/:id',
+          name: 'Shopping',
+          meta: {
+            auth: true,
+            title: '支付中心',
+          },
+          component: () => import('@/views/shopping/index.vue'),
+        },
+      ],
+    },
+    {
       path: '/account',
       component: accountLayout,
       redirect: '/account/login',
@@ -205,6 +229,9 @@ const router = new Router({
         {
           path: '/account/login',
           name: 'login',
+          params: {
+            history: '',
+          },
           meta: {
             title: '登录',
           },
@@ -236,11 +263,32 @@ NProgress.configure({
  */
 router.beforeEach((to, from, next) => {
   NProgress.start();
-  document.title = to.meta.title;
+  document.title = `${to.meta.title}_信奥训练平台`;
   // 合法性校验
-  if (to.meta.auth) {
-    console.log('into auth');
+  if (to.meta.auth && !store.getters.isLogin) {
+    next({ name: 'login' });
+  }
+
+  if (to.name === 'login') {
+    to.params.history = from.path;
     next();
+  }
+
+  if (to.name === 'problemDetail') {
+    problem.isHaveToBuy(to.params.id)
+      .then((result) => {
+        console.log(result);
+        if (result.data.isBuy === 1) {
+          next();
+        } else {
+          next({ name: 'problemPackageDetail', params: { id: result.packetId } });
+          Message({
+            message: '请先购买题包！',
+            type: 'warning',
+            duration: 5 * 1000,
+          });
+        }
+      });
   }
   next();
 });

@@ -84,11 +84,15 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isLogin',
       'avator',
     ]),
-    focusItem() {
-      return this.$route.meta.title;
+    focusItem: {
+      get() {
+        return this.$route.meta.title;
+      },
+      set(value) {
+        return value;
+      },
     },
   },
   methods: {

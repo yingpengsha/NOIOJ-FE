@@ -24,7 +24,7 @@
       </div>
     </main>
 
-    <problem-list v-if="leftList" ref="leftList" :packet-id="problem.packetId" @reload="reload" @unShow="handleToControlLeft"/>
+    <problem-list v-if="leftList" ref="leftList" :packetId="problem.packetId" @reload="reload" @unShow="handleToControlLeft"/>
     <div class="openButtonClass" @click="handleToControlLeft" ref="openButton">
       <i class="el-icon-arrow-left" v-if="leftList"></i>
       <i class="el-icon-arrow-right" v-else></i>

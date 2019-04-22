@@ -17,6 +17,35 @@
         </span>
       </el-dialog>
     </header>
+
+    <main>
+      <h4>消费记录</h4>
+      <el-timeline>
+        <el-timeline-item
+          v-for="(item, index) in list"
+          :key="index"
+          :timestamp="item.createDate">
+          <div style="color:#67C23A" v-if="item.packetId < 0">{{`充值 ${item.price} 元`}}</div>
+          <div v-else>
+            购买题包
+            <router-link style="color:#0681FF;text-decoration:underline;" :to="`/problem/package/detail/${item.packetId}`">
+              {{item.name}}
+            </router-link>
+            题包,
+            <span style="color:red">{{`消费 ${item.price} 元`}}</span>
+          </div>
+        </el-timeline-item>
+      </el-timeline>
+      <el-button
+        round
+        style="width:100%;"
+        :loading="loading"
+        v-show="list.length<total"
+        @click="getMoreList"
+      >
+        查看更多
+      </el-button>
+    </main>
   </div>
 </template>
 
@@ -31,6 +60,13 @@ export default {
       money: 0,
       dialogVisible: false,
       number: 0,
+      list: [],
+      total: 0,
+      listQuery: {
+        limit: 10,
+        page: 1,
+      },
+      loading: false,
     };
   },
   methods: {
@@ -41,10 +77,16 @@ export default {
         });
     },
     getList() {
-      order.query({ page: 1 })
+      order.query(this.listQuery)
         .then((result) => {
-          console.log(result);
+          this.total = result.data.totalCount;
+          this.list.push(...result.data.list);
+          this.loading = false;
         });
+    },
+    getMoreList() {
+      this.listQuery.page += 1;
+      this.getList();
     },
     handleToOpenDialog() {
       this.number = 0;
@@ -76,7 +118,7 @@ export default {
   header{
     display: flex;
     justify-content:space-between;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 1px solid $borderTwo;
     .balance{
       font-size: 17px;

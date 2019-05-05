@@ -35,11 +35,10 @@
           </div>
 
           <el-table
-            v-loading="loading"
-            :data="tableData"
+            :data="list"
             style="width: 100%"
             stripe
-            :default-sort = "{prop: 'date', order: 'descending'}"
+            :default-sort = "{prop: 'solved', order: 'descending'}"
             >
             <el-table-column
               type="index"
@@ -81,10 +80,24 @@
               width="80"
               align="center">
               <template slot-scope="scope">
-                {{ Math.floor(scope.row.solved / scope.row.submit * 10000)/100 + '%' }}
+                {{ scope.row.submit
+                ? Math.floor(scope.row.solved / scope.row.submit * 10000)/100 + '%'
+                :0 }}
               </template>
             </el-table-column>
           </el-table>
+
+          <div class="pagination-container" style="margin-top:10px;">
+            <el-pagination
+              v-show="total>0"
+              :current-page="listQuery.page"
+              :page-size="listQuery.limit"
+              :total="total"
+              layout="prev, pager, next"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange">
+            </el-pagination>
+          </div>
         </el-card>
       </main>
     </section>
@@ -104,50 +117,35 @@ export default {
       listQuery: {
         nick: '',
         school: '',
-        limit: 50,
+        limit: 10,
         page: 1,
-        orderBy: 'solved',
-        desc: 'desc',
       },
-      tableData: [{
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }, {
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }, {
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }, {
-        nick: '王小虎',
-        school: 'XXXX中学',
-        introduce: '这个人很懒。这个人很懒。这个人很懒。这个人很懒。',
-        solved: 378,
-        submit: 388,
-      }],
-
     };
   },
   methods: {
-    formatter(row) {
-      return row.address;
+    handleSizeChange(val) {
+      this.listQuery.limit = val;
+      this.getList();
+    },
+    handleCurrentChange(val) {
+      this.listQuery.page = val;
+      this.getList();
+    },
+    handleFilter() {
+      this.listQuery.page = 1;
+      this.getList();
     },
     getList() {
       this.loading = true;
-      rank.query()
+      rank.query(this.listQuery)
         .then((result) => {
           if (result.code === 1) {
             this.list = result.data.list;
-            this.list = false;
+            this.total = result.data.totalCount;
+            this.loading = false;
+          } else if (result.code === 0) {
+            this.list = [];
+            this.total = 0;
           }
         });
     },
@@ -197,7 +195,7 @@ export default {
     main{
       margin-top: -120px;
       .box-card{
-        min-height: 1000px;
+        text-align: center
       }
     }
   }

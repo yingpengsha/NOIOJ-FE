@@ -61,12 +61,12 @@ service.interceptors.response.use(
           }, 1000);
           break;
 
-        // 404请求不存在
+          // 404请求不存在
         case 404:
           console.error('404:请求不存在');
           break;
 
-        // 其他错误，直接抛出错误提示
+          // 其他错误，直接抛出错误提示
         default:
           console.error(error.response.data.message);
       }

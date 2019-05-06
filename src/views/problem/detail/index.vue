@@ -20,7 +20,7 @@
         </el-tabs>
       </div>
       <div class="editor">
-        <editor :problemId="problem.problemId" @onSubmit="onSubmit"/>
+        <editor :problemId="problem.problemId" @onSubmit="onSubmit" :code="code"/>
       </div>
     </main>
 
@@ -35,6 +35,7 @@
 <script>
 import Editor from '@/components/monaco-editor/index.vue';
 import * as problem from '@/api/problem';
+import * as solution from '@/api/solution';
 import ProblemList from './components/problemList.vue';
 import HeaderBar from './components/headerBar.vue';
 import ProblemInfo from './components/problemInfo.vue';
@@ -48,6 +49,7 @@ export default {
       problem: {},
       leftList: false,
       activeName: 'first',
+      code: '',
     };
   },
   computed: {
@@ -76,6 +78,14 @@ export default {
           this.problem = result.data;
         });
     },
+    getLastCode() {
+      solution.loadLastCode(this.problemId)
+        .then((result) => {
+          if (result.code === 1) {
+            this.code = result.data.source;
+          }
+        });
+    },
     reload(obj) {
       this.$router.push({ name: 'problemDetail', params: { id: obj.id } });
       this.getProblem();
@@ -83,6 +93,9 @@ export default {
   },
   created() {
     this.getProblem();
+  },
+  mounted() {
+    this.getLastCode();
   },
   components: {
     Editor,

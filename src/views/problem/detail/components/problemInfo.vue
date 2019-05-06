@@ -4,13 +4,13 @@
       <h2>描述</h2>
       <p v-html="problem.description"></p>
     </div>
-    <div class="example">
+    <!-- <div class="example">
       <h2>样例</h2>
       <h4>输入</h4>
       <p v-html="problem.input"></p>
       <h4>输出</h4>
       <p v-html="problem.output"></p>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -26,7 +26,7 @@ export default {
     problemId: {
       type: Number,
     },
-    codes: {
+    code: {
       type: String,
     },
     language: {
@@ -75,6 +75,11 @@ export default {
       },
     };
   },
+  watch: {
+    code() {
+      this.initEditor();
+    },
+  },
   methods: {
     onSubmit() {
       this.form = {
@@ -102,7 +107,7 @@ export default {
     initEditor() {
       const self = this;
       self.monacoEditor = monaco.editor.create(self.$refs.container, {
-        value: self.codesCopy || self.codes,
+        value: self.codesCopy || self.code,
         language: self.language,
         theme: self.theme, // vs, hc-black, or vs-dark
         editorOptions: self.editorOptions,

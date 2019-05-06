@@ -23,7 +23,7 @@ const router = new Router({
           path: '/homepage',
           name: 'homepage',
           meta: {
-            title: '信奥训练平台',
+            title: '首页',
           },
           component: () => import('@/views/homepage/index.vue'),
         },
@@ -87,6 +87,14 @@ const router = new Router({
             title: '公开竞赛',
           },
           component: () => import('@/views/match/index.vue'),
+        },
+        {
+          path: '/match/detail',
+          name: 'MatchDetail',
+          meta: {
+            title: '竞赛详情',
+          },
+          component: () => import('@/views/match/detail.vue'),
         },
       ],
     },

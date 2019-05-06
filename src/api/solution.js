@@ -1,5 +1,15 @@
 import request from '@/utils/request';
 
+export function loadLastCode(id) {
+  return request({
+    url: '/solution/load',
+    method: 'get',
+    params: {
+      id,
+    },
+  });
+}
+
 export function query({ limit, page, problemId }) {
   return request({
     url: '/solution/status',

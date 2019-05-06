@@ -131,8 +131,10 @@ export default {
       this.listLoading = true;
       discuss.query(this.listQuery)
         .then((result) => {
-          this.total = result.data.totalCount;
-          this.list = result.data.list;
+          if (result.code === 1) {
+            this.total = result.data.totalCount;
+            this.list = result.data.list;
+          }
           this.listLoading = false;
         });
     },

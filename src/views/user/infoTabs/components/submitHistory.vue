@@ -96,7 +96,16 @@ export default {
             borderColor: '#fff',
             borderWidth: 1.6,
           },
-          yearLabel: { show: false },
+          dayLabel: {
+            nameMap: 'cn',
+            margin: 70,
+          },
+          monthLabel: {
+            nameMap: 'cn',
+          },
+          yearLabel: {
+            show: false,
+          },
         },
         series: {
           type: 'heatmap',

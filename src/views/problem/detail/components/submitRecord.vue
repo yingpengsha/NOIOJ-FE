@@ -81,7 +81,7 @@ export default {
       listLoading: true,
       loading: true,
       listQuery: {
-        limit: 20,
+        limit: 10,
         page: 1,
         problemId: this.$route.params.id,
       },
@@ -109,8 +109,10 @@ export default {
     getList() {
       solution.query(this.listQuery)
         .then((result) => {
-          this.total = result.data.totalCount;
-          this.list = result.data.list;
+          if (result.code === 1) {
+            this.total = result.data.totalCount;
+            this.list = result.data.list;
+          }
           this.loading = false;
           this.listLoading = false;
         });

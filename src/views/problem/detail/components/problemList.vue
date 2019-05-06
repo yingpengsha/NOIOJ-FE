@@ -18,14 +18,13 @@
         <el-table
           :data="list"
           :show-header="false"
-          max-height="calc(100vh - 108px)"
-          :row-style="{color: 'black', background:'#f6f6f6'}"
+          :row-style="{color: 'black', background:'#f6f6f6',width:'580px'}"
           @row-click="handleToProblemDetail"
-          style="width: 100%">
+          style="width: 580px">
           <el-table-column
-            type="index"
+            prop="problemId"
             align="center"
-            width="40px">
+            width="60px">
           </el-table-column>
           <el-table-column
             prop="title">
@@ -65,7 +64,7 @@ export default {
       list: [],
       loading: true,
       listQuery: {
-        limit: 50,
+        limit: 20,
         page: 1,
         tags: null,
         difficulty: null,
@@ -153,6 +152,7 @@ export default {
   main{
     height: 100%;
     margin: 10px 0;
+    overflow:auto;
   }
 }
 .hidden{

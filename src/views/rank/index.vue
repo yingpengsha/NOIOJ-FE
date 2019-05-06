@@ -47,9 +47,6 @@
               type="index"
               :index="indexrank"
             >
-              <!-- <template>
-                {{ indexrank}}
-              </template> -->
             </el-table-column>
             <el-table-column
               prop="nick"

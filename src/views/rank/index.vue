@@ -39,13 +39,17 @@
             :data="list"
             style="width: 100%"
             stripe
-            :default-sort = "{prop: 'solved', order: 'descending'}"
             >
             <el-table-column
-              type="index"
+              width="80"
               label="排名"
               align="center"
-              >
+              type="index"
+              :index="indexrank"
+            >
+              <!-- <template>
+                {{ indexrank}}
+              </template> -->
             </el-table-column>
             <el-table-column
               prop="nick"
@@ -74,7 +78,8 @@
               prop="submit"
               label="提交"
               width="80"
-              align="center">
+              align="center"
+              sortable>
             </el-table-column>
             <el-table-column
               label="通过率"
@@ -115,6 +120,8 @@ export default {
       loading: true,
       list: [],
       total: 0,
+      size: 0,
+      current: 0,
       listQuery: {
         nick: '',
         school: '',
@@ -124,6 +131,9 @@ export default {
     };
   },
   methods: {
+    indexrank(index) {
+      return index + 1 + (this.current - 1) * this.size;
+    },
     handleSizeChange(val) {
       this.listQuery.limit = val;
       this.getList();
@@ -141,8 +151,11 @@ export default {
       rank.query(this.listQuery)
         .then((result) => {
           if (result.code === 1) {
+            console.log(result);
             this.list = result.data.list;
             this.total = result.data.totalCount;
+            this.current = result.data.currentPage;
+            this.size = result.data.pageSize;
             this.loading = false;
           } else if (result.code === 0) {
             this.list = [];

@@ -226,7 +226,7 @@ export default {
     .line{
       width:100%;
       height:1px;
-      backgournd:black;
+      background:black;
     }
     .select{
       margin-top: 10px;

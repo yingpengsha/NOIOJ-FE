@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
 export function query({
-  limit, page, title, tags, difficulty, type, isFree, orderBy,
+  limit, page, title, tags, difficulty, type, isFree, orderBy, packetId,
 }) {
   return request({
     url: '/problem/list',
@@ -15,7 +15,16 @@ export function query({
       type,
       isFree,
       orderBy,
+      packetId,
     },
+  });
+}
+
+export function isHaveToBuy(id) {
+  return request({
+    url: '/problem',
+    method: 'get',
+    params: { id },
   });
 }
 

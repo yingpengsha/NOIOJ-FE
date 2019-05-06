@@ -6,8 +6,9 @@
 <script>
 import echarts from 'echarts';
 import { resize } from '../mixins/resize';
+import * as utils from '@/utils';
 
-require('echarts/theme/macarons');
+require('echarts/theme/shine');
 
 export default {
   name: 'SubmitHistory',
@@ -23,10 +24,14 @@ export default {
     },
     height: {
       type: String,
-      default: '140px',
+      default: '150px',
     },
     chartData: {
-      type: Object,
+      type: Array,
+      required: true,
+    },
+    max: {
+      type: Number,
       required: true,
     },
   },
@@ -56,7 +61,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chart = echarts.init(this.$el, 'macarons');
+      this.chart = echarts.init(this.$el, 'shine');
       this.setOptions(this.chartData);
     },
     setOptions() {
@@ -64,13 +69,13 @@ export default {
         color: ['#0681FF'],
         tooltip: {},
         visualMap: {
-          min: 0,
-          max: 100,
+          min: 1,
+          max: this.max,
           type: 'continuous',
           orient: 'horizontal',
           right: '25',
           dispaly: 'none',
-          top: 125,
+          top: 135,
           textStyle: {
             color: '#000',
           },
@@ -79,33 +84,26 @@ export default {
           top: 20,
           left: 30,
           right: 30,
-          cellSize: ['auto', 13],
-          range: '2019',
+          cellSize: 16,
+          range: [utils.parseTime(new Date() - 365 * 24 * 60 * 60 * 1000), utils.parseTime(new Date())],
+          splitLine: {
+            lineStyle: {
+              color: '#fff',
+            },
+          },
           itemStyle: {
-            normal: { borderWidth: 0.5 },
+            color: '#eee',
+            borderColor: '#fff',
+            borderWidth: 1.6,
           },
           yearLabel: { show: false },
         },
         series: {
           type: 'heatmap',
           coordinateSystem: 'calendar',
-          data: this.getVirtulData(),
+          data: this.chartData,
         },
       });
-    },
-    getVirtulData() {
-      const year = '2019';
-      const date = +echarts.number.parseDate(`${year}-01-01`);
-      const end = +echarts.number.parseDate(`${+year + 1}-01-01`);
-      const dayTime = 3600 * 24 * 1000;
-      const data = [];
-      for (let time = date; time < end; time += dayTime) {
-        data.push([
-          echarts.format.formatTime('yyyy-MM-dd', time),
-          Math.floor(Math.random() * 100),
-        ]);
-      }
-      return data;
     },
   },
 };

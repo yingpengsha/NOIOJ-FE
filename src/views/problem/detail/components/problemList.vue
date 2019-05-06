@@ -31,8 +31,6 @@
             prop="title">
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址"
             align="center"
             width="60px">
             <template slot-scope="scope">
@@ -75,6 +73,7 @@ export default {
         title: null,
         isFree: null,
         orderBy: null,
+        packetId: null,
       },
       difficulty: ['入门', '简单', '中等', '困难', '超难'],
     };
@@ -100,6 +99,7 @@ export default {
     },
     getList() {
       this.loading = true;
+      this.listQuery.packetId = this.packetId;
       problem.query(this.listQuery)
         .then((result) => {
           this.list = result.data.list;

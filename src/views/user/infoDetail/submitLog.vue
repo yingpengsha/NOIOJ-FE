@@ -19,7 +19,7 @@
       round
       style="width:100%;"
       :loading="loading"
-      v-show="list.length!==total"
+      v-show="list.length<total"
       @click="getMoreList"
     >
       查看更多

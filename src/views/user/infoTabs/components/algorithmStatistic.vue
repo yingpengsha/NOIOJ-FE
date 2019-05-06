@@ -26,7 +26,11 @@ export default {
       default: '300px',
     },
     chartData: {
-      type: Object,
+      type: Array,
+      required: true,
+    },
+    max: {
+      type: Number,
       required: true,
     },
   },
@@ -60,6 +64,10 @@ export default {
       this.setOptions(this.chartData);
     },
     setOptions() {
+      if (this.max < 5) {
+        this.max = 5;
+      }
+      console.log(this.chartData);
       this.chart.setOption({
         color: ['#0681FF'],
         tooltip: {
@@ -82,11 +90,11 @@ export default {
             },
           },
           indicator: [
-            { name: '树、图', max: 10000 },
-            { name: '字符串', max: 20000 },
-            { name: '哈希表', max: 20000 },
-            { name: '队列、栈、堆', max: 20000 },
-            { name: '数组、链表', max: 20000 },
+            { name: '搜索/递归/回溯', max: this.max + 1 },
+            { name: '排序', max: this.max + 1 },
+            { name: '数学', max: this.max + 1 },
+            { name: '动态规划', max: this.max + 1 },
+            { name: '其他算法', max: this.max + 1 },
           ],
         },
         series: [{
@@ -103,7 +111,7 @@ export default {
           },
           data: [
             {
-              value: [5000, 7000, 12000, 11000, 15000],
+              value: this.chartData,
               name: '算法能力',
             },
           ],

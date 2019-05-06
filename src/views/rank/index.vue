@@ -41,7 +41,6 @@
             stripe
             >
             <el-table-column
-              width="80"
               label="排名"
               align="center"
               type="index"

@@ -84,17 +84,28 @@ const router = new Router({
           path: '/match/index',
           name: 'match',
           meta: {
+            auth: true,
             title: '公开竞赛',
           },
           component: () => import('@/views/match/index.vue'),
         },
         {
-          path: '/match/detail',
+          path: '/match/detail/:id',
           name: 'MatchDetail',
           meta: {
+            auth: true,
             title: '竞赛详情',
           },
           component: () => import('@/views/match/detail.vue'),
+        },
+        {
+          path: '/match/problem/:id',
+          name: 'MatchProblem',
+          meta: {
+            auth: true,
+            title: '题目详情',
+          },
+          component: () => import('@/views/match/problem.vue'),
         },
       ],
     },
@@ -107,6 +118,7 @@ const router = new Router({
           path: '/ladder/index',
           name: 'ladder',
           meta: {
+            auth: true,
             title: '天梯竞技',
           },
           component: () => import('@/views/ladder/index.vue'),
@@ -274,10 +286,10 @@ router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title}_信奥训练平台`;
   // 合法性校验
   if (to.meta.auth && !store.getters.isLogin) {
-    next({ name: 'login' });
+    next({ name: 'login', params: { history: to.path } });
   }
 
-  if (to.name === 'login') {
+  if (to.name === 'login' && !to.params.history) {
     to.params.history = from.path;
     next();
   }

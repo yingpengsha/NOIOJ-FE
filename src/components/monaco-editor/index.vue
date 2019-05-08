@@ -26,14 +26,11 @@ export default {
     problemId: {
       type: Number,
     },
+    contestId: {
+      type: Number,
+    },
     code: {
       type: String,
-    },
-    language: {
-      type: String,
-      default() {
-        return 'cpp';
-      },
     },
     editorOptions: {
       type: Object,
@@ -67,6 +64,7 @@ export default {
         cpp: 1,
         java: 3,
       },
+      language: 'cpp',
       form: {
         problemId: 0,
         inDate: '',
@@ -88,6 +86,10 @@ export default {
         language: this.languageList[this.language],
         source: this.monacoEditor.getValue(),
       };
+      console.log(this.contestId);
+      if (this.contestId) {
+        this.form.contestId = this.contestId;
+      }
       solution.upload(this.form)
         .then((result) => {
           if (result.code === 1) {

@@ -11,6 +11,16 @@ export function rank({ limit, page }) {
   });
 }
 
+export function query(id) {
+  return request({
+    url: '/contest/detail',
+    method: 'get',
+    params: {
+      id,
+    },
+  });
+}
+
 export function status() {
   return request({
     url: '/contest/status',
@@ -54,6 +64,27 @@ export function solution({ limit, page, contestId }) {
       limit,
       page,
       contestId,
+    },
+  });
+}
+
+export function exit(id) {
+  return request({
+    url: '/contest',
+    method: 'delete',
+    params: {
+      id,
+    },
+  });
+}
+
+export function finish(id) {
+  return request({
+    url: '/contest',
+    method: 'put',
+    data: {
+      contestId: id,
+      status: 1,
     },
   });
 }

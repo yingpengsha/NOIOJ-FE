@@ -4,8 +4,8 @@
       <div class="img"/>
       <main>
         <p>随机开始一场 模拟竞赛</p>
-        <el-button type="success" class="button" @click="continueTest" v-if="status">继续竞赛</el-button>
-        <el-button type="info" class="button" @click="startTest" v-else>开始竞赛</el-button>
+        <el-button type="success" class="button" @click="continueMatch" v-if="status">继续竞赛</el-button>
+        <el-button type="info" class="button" @click="startMatch" v-else>开始竞赛</el-button>
         <br/>
       </main>
     </section>
@@ -19,7 +19,7 @@
     </section>
 
     <section id="rank">
-      <div class="rank">
+      <div class="rank" v-loading="rankLoading">
         <div class="title">
           <svg-icon icon-class="rank" class-name="icon" />
           <span>竞赛排行</span>
@@ -67,6 +67,8 @@
             :height="520"
             :data="history"
             stripe
+            v-loading="historyLoading"
+            @row-click="matchDetail"
             style="width: 100%">
             <el-table-column
               prop="title"
@@ -131,14 +133,22 @@ export default {
     indexrank(index) {
       return index + 3;
     },
-    startTest() {
+    startMatch() {
       match.create()
-        .then(() => {
-          this.continueTest();
+        .then((result) => {
+          this.$router.push({ name: 'MatchDetail', params: { id: result.data } });
+          this.$notify({
+            title: '成功',
+            message: '竞赛已经开始，时间 1 小时 30 分钟。',
+            type: 'success',
+          });
         });
     },
-    continueTest() {
-      this.$router.push({ name: 'MatchDetail' });
+    continueMatch() {
+      this.$router.push({ name: 'MatchDetail', params: { id: this.status.contestId } });
+    },
+    matchDetail(row) {
+      this.$router.push({ name: 'MatchDetail', params: { id: row.contestId } });
     },
     getHistory() {
       this.historyLoading = true;

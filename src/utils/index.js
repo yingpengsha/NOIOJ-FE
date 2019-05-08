@@ -51,3 +51,19 @@ export function formatTime(time, option) {
   }
   return `${d.getMonth() + 1}月${d.getDate()}日${d.getHours()}时${d.getMinutes()}分`;
 }
+
+export function formatSecond(time) {
+  let str = '';
+  if (time >= 3600) {
+    str += ` ${parseInt(time / 3600, 0)} 小时`;
+    time %= 3600;
+  }
+  if (time >= 60) {
+    str += ` ${parseInt(time / 60, 0)} 分钟`;
+    time %= 60;
+  }
+  if (time > 0) {
+    str += ` ${time} 秒`;
+  }
+  return str;
+}

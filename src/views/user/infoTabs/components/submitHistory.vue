@@ -97,8 +97,7 @@ export default {
             borderWidth: 1.6,
           },
           dayLabel: {
-            nameMap: 'cn',
-            margin: 70,
+            show: false,
           },
           monthLabel: {
             nameMap: 'cn',

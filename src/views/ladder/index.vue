@@ -6,13 +6,31 @@
         <p class="title">信奥天梯竞技</p>
         <p style="font-size:18px;margin-top:10px;">赶快加入天梯竞技和熟悉的同学或者陌生的对手一较高下吧！</p>
         <p style="font-size:24px;margin-top:60px;">你现在的段位</p>
-        <p style="font-size:34px;margin:20px;">{{levelList[levelId]}}</p>
+        <p style="font-size:34px;margin:20px;">{{levelList[levelId]}}{{levelId ? 5-parseInt((acChallengeNum-(levelId-1)*16)/4) : null}}</p>
         <svg-icon :icon-class="`level${levelId}`" class-name="levelIcon"/>
-        <p>下一级别已通过挑战数量: {{acChallengeNum}}/4</p>
+        <p>下一级别已通过挑战数量: {{acChallengeNum % 4}}/4</p>
         <p v-if="status.code">挑战倒计时：{{this.time}}</p>
         <el-button type="success" class="button" @click="continueChallenge" v-if="status.code">继续挑战</el-button>
         <el-button type="primary" class="button" @click="startChallenge" v-else>开始挑战</el-button>
       </main>
+    </section>
+
+    <section class="rank">
+      <header>
+        <div
+          v-for="(item,key) in menuList"
+          :key="key"
+          :class="focusItem===item.component?'focus':null"
+          @click="handleToChangeItem(item.component)"
+        >
+          <span>{{item.title}}</span>
+          <div class="line" />
+        </div>
+      </header>
+
+      <Rank v-if="focusItem === 'Rank'" />
+      <Rules v-if="focusItem === 'Rules'" />
+      <Level v-if="focusItem === 'Level'" />
     </section>
   </div>
 </template>
@@ -21,6 +39,9 @@
 import * as user from '@/api/users';
 import * as utils from '@/utils/index';
 import * as ladder from '@/api/ladder';
+import Rank from './components/rank.vue';
+import Rules from './components/rules.vue';
+import Level from './components/level.vue';
 
 export default {
   name: 'Ladder',
@@ -32,9 +53,18 @@ export default {
       status: {},
       endTime: null,
       time: null,
+      menuList: [
+        { title: '排名', component: 'Rank' },
+        { title: '规则', component: 'Rules' },
+        { title: '段位介绍', component: 'Level' },
+      ],
+      focusItem: 'Rank',
     };
   },
   methods: {
+    handleToChangeItem(item) {
+      this.focusItem = item;
+    },
     continueChallenge() {
       this.$router.push({ name: 'ladderProblem' });
     },
@@ -86,6 +116,11 @@ export default {
     this.getData();
     this.getStatus();
   },
+  components: {
+    Rank,
+    Rules,
+    Level,
+  },
 };
 </script>
 
@@ -134,6 +169,44 @@ export default {
         height: 50px;
         font-size: 18px;
         letter-spacing: 3px;
+      }
+    }
+  }
+  .rank{
+    min-height: calc(100vh - 100px);
+    header{
+      display: flex;
+      justify-content: center;
+      div{
+        width: 200px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 300;
+        margin: 30px 30px;
+        padding-bottom: 15px;
+        transition: all .3s;
+        position: relative;
+        &:hover{
+          color: $blue;
+          cursor: pointer;
+        }
+        .line{
+          height:2px;
+          width:0%;
+          background:$blue;
+          margin:0px;
+          padding:0px;
+          position:absolute;
+          bottom: 0px;
+          left: 0px;
+          transform: all .3s;
+        }
+      }
+      .focus{
+        color: $blue;
+        .line{
+          width: 100%;
+        }
       }
     }
   }

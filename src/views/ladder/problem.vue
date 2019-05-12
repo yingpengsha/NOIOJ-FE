@@ -8,10 +8,87 @@
       本次挑战已经开始，还剩余 {{time}} 结束
     </section>
     <h1>{{problem.title}}</h1>
+
     <section v-html="problem.description"></section>
+
     <section class="editor">
       <editor :problemId="problem.problemId" :challengeId="problem.challengeId" @onSubmit="onSubmit"/>
     </section>
+
+    <section class="submit">
+      <p class="title">提交记录</p>
+      <el-table
+        :data="submitLog"
+        v-loading="submitLoading"
+        border
+        stripe>
+        <el-table-column
+          prop="title"
+          label="题目名"
+          align="center">
+          <template slot-scope="scope">
+            {{scope.row.title}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="inDate"
+          label="上传时间"
+          align="center">
+          <template slot-scope="scope">
+            {{scope.row.inDate}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="result"
+          label="结果"
+          align="center"
+          width="180">
+          <template slot-scope="scope">
+            <el-tag :type="resultList[scope.row.result].type">
+              {{resultList[scope.row.result].en}}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="time"
+          label="运行时间"
+          align="center"
+          width="100">
+          <template slot-scope="scope">
+            {{`${scope.row.time} ms`}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="memory"
+          label="内存消耗"
+          align="center"
+          width="100">
+          <template slot-scope="scope">
+            {{scope.row.memory | memoryFilter}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="language"
+          label="语言"
+          align="center"
+          width="100">
+          <template slot-scope="scope">
+            {{language[scope.row.language]}}
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page.sync="listQuery.page"
+        :page-size="listQuery.limit"
+        layout="prev, pager, next, jumper"
+        :total="submitTotal"
+        v-show="submitTotal > this.listQuery.limit"
+        style="width:300px;">
+      </el-pagination>
+    </section>
+
   </div>
 </template>
 
@@ -19,6 +96,7 @@
 import * as ladder from '@/api/ladder';
 import Editor from '@/components/monaco-editor/index.vue';
 import * as utils from '@/utils/index';
+import { resultList, language } from '@/utils/OJ';
 
 export default {
   name: 'LadderProblem',
@@ -28,6 +106,16 @@ export default {
       endTime: null,
       time: null,
       isDone: false,
+      listQuery: {
+        limit: 5,
+        page: 1,
+        challengeId: null,
+      },
+      submitLog: [],
+      submitLoading: true,
+      submitTotal: 0,
+      resultList,
+      language,
     };
   },
   methods: {
@@ -36,11 +124,28 @@ export default {
         .then((result) => {
           if (result.code) {
             this.problem = result.data;
+            this.listQuery.challengeId = result.data.challengeId;
+            this.getSubmitLog();
             this.endTime = new Date(Number(new Date(result.data.startTime)) + 900000);
             this.countDown();
           } else {
             this.$router.push({ name: 'ladder' });
           }
+        });
+    },
+    handleCurrentChange(val) {
+      this.listQuery.page = val;
+      this.getSubmitLog(this.status.contestId);
+    },
+    getSubmitLog() {
+      this.submitLoading = true;
+      ladder.submitLog(this.listQuery)
+        .then((result) => {
+          if (result.data) {
+            this.submitLog = result.data.list;
+            this.submitTotal = result.data.totalCount;
+          }
+          this.submitLoading = false;
         });
     },
     countDown() {
@@ -71,7 +176,7 @@ export default {
       }, 10000);
     },
     onSubmit() {
-      // this.$router.push({ name: 'MatchDetail', params: { id: this.$route.query.contestId } });
+      this.getSubmitLog();
     },
   },
   created() {
@@ -79,6 +184,17 @@ export default {
   },
   components: {
     Editor,
+  },
+  filters: {
+    parseTime(date) {
+      return utils.parseTime(date, '{y}-{m}-{d}');
+    },
+    memoryFilter(memory) {
+      if (memory < 1024) {
+        return `${memory} KB`;
+      }
+      return `${(memory / 1024).toFixed(1)} MB`;
+    },
   },
 };
 </script>
@@ -117,6 +233,11 @@ export default {
   .editor{
     height: 700px;
     padding: 30px 0;
+  }
+  .submit{
+    .title{
+      font-size: 24px;
+    }
   }
 }
 </style>

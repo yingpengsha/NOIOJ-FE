@@ -16,7 +16,7 @@ export function query() {
 
 export function rank(levelId) {
   return request({
-    url: '/challenge',
+    url: '/challenge/rank',
     method: 'post',
     data: {
       levelId,

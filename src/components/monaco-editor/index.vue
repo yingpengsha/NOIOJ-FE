@@ -29,6 +29,9 @@ export default {
     contestId: {
       type: Number,
     },
+    challengeId: {
+      type: Number,
+    },
     code: {
       type: String,
     },
@@ -86,9 +89,11 @@ export default {
         language: this.languageList[this.language],
         source: this.monacoEditor.getValue(),
       };
-      console.log(this.contestId);
       if (this.contestId) {
         this.form.contestId = this.contestId;
+      }
+      if (this.challengeId) {
+        this.form.challengeId = this.challengeId;
       }
       solution.upload(this.form)
         .then((result) => {

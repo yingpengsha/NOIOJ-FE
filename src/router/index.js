@@ -123,6 +123,15 @@ const router = new Router({
           },
           component: () => import('@/views/ladder/index.vue'),
         },
+        {
+          path: '/ladder/problem',
+          name: 'ladderProblem',
+          meta: {
+            auth: true,
+            title: '题目详情',
+          },
+          component: () => import('@/views/ladder/problem.vue'),
+        },
       ],
     },
     {

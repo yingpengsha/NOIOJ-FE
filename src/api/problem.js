@@ -39,6 +39,7 @@ export function queryById(id) {
 }
 
 export function upload(data) {
+  console.log(data);
   return request({
     url: '/problem',
     method: 'post',
@@ -55,6 +56,7 @@ export function update(data) {
 }
 
 export function deleteById(id) {
+  console.log(123);
   return request({
     url: '/problem',
     method: 'delete',

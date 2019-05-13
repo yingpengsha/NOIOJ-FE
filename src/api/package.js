@@ -35,11 +35,19 @@ export function queryById(id) {
   });
 }
 
-export function insert(data) {
+export function insert({
+  name, introduce, image, price,
+}) {
   return request({
     url: '/packet',
     method: 'post',
-    data,
+    data: {
+      name,
+      introduce,
+      image,
+      price,
+      originClass: 2,
+    },
   });
 }
 

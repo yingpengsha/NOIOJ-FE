@@ -58,6 +58,14 @@ const router = new Router({
           },
           component: () => import('@/views/package/detail.vue'),
         },
+        {
+          path: '/problem/package/upload',
+          name: 'problemPackageUpload',
+          meta: {
+            title: '上传题目',
+          },
+          component: () => import('@/views/package/upload.vue'),
+        },
       ],
     },
     {

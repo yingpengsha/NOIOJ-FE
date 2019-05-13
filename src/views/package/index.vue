@@ -12,7 +12,7 @@
         @keyup.enter.native="handleFilter">
       </el-input>
       <el-button type="success" style="margin-left:10px;" @click="handleFilter">搜索</el-button>
-      <el-button type="primary">上传题包</el-button>
+      <el-button type="primary" @click="handleToUpload">上传题包</el-button>
     </div>
 
     <div class="packageList" v-loading="packageLoading">
@@ -72,6 +72,9 @@ export default {
     handleFilter() {
       this.listQuery.page = 1;
       this.getData();
+    },
+    handleToUpload() {
+      this.$router.push({ name: 'problemPackageUpload' });
     },
     getData() {
       this.packageLoading = true;

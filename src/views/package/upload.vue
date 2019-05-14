@@ -2,9 +2,9 @@
   <div id="upload">
     <main>
       <el-steps :active="active" align-center>
-        <el-step title="题包信息" @click.native="first"></el-step>
-        <el-step title="题目信息" @click.native="second"></el-step>
-        <el-step title="增加题目" @click.native="third"></el-step>
+        <el-step title="题包信息"></el-step>
+        <el-step title="题目信息"></el-step>
+        <el-step title="增加题目"></el-step>
       </el-steps>
       <el-row>
         <el-col :span="16">
@@ -461,16 +461,6 @@ export default {
       });
     },
     // 题目信息
-
-    first() {
-      this.active = 0;
-    },
-    second() {
-      this.active = 1;
-    },
-    third() {
-      this.active = 2;
-    },
     prev() {
       // eslint-disable-next-line no-plusplus
       if (this.active-- === 0) this.active = 0;

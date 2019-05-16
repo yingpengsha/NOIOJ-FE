@@ -6,6 +6,11 @@
 <script>
 export default {
   name: 'Lesson',
+  data() {
+    return {
+
+    };
+  },
 };
 </script>
 

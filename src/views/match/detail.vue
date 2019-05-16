@@ -312,7 +312,7 @@ export default {
   }
   .buttonList{
     padding:10px 0;
-    float: right;
+    text-align: right;
   }
 }
 </style>

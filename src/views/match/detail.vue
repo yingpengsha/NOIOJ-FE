@@ -12,7 +12,7 @@
     <section class="rules">
       <div class="title">比赛规则</div>
       <div class="detail">
-        比赛规则比赛规则比赛规则比赛规则
+        <p>每场竞赛共4题，比赛为 1 小时 30 分钟。每道题根据难易度有不同的得分，答对题目数越多即得分越高，在得分相同的情况下，答题用时最短则排名越高。</p>
       </div>
     </section>
 

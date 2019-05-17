@@ -173,7 +173,7 @@ export default {
     }
   }
   .rank{
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 400px);
     header{
       display: flex;
       justify-content: center;

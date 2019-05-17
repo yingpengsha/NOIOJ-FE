@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Layout from '@/views/layout/Layout.vue';
-import accountLayout from '@/views/layout/account-Layout.vue';
+import accountLayout from '@/views/layout/accountLayout.vue';
 import store from '@/store';
 import * as problem from '@/api/problem';
 import { Message } from 'element-ui';
@@ -170,7 +170,23 @@ const router = new Router({
           },
           component: () => import('@/views/lesson/index.vue'),
         },
+        {
+          path: '/lesson/detail/:id',
+          name: 'lessonDetail',
+          meta: {
+            title: '课程详情',
+          },
+          component: () => import('@/views/lesson/detail.vue'),
+        },
       ],
+    },
+    {
+      path: '/lesson/video/:id',
+      name: 'Video',
+      meta: {
+        title: '在线学习',
+      },
+      component: () => import('@/views/lesson/video.vue'),
     },
     {
       path: '/user',

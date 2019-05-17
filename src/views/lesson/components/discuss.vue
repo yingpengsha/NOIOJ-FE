@@ -70,14 +70,14 @@ export default {
       listQuery: {
         limit: 15,
         page: 1,
-        problemId: this.$route.params.id,
+        courseId: this.$route.params.id,
       },
       total: 0,
       item: {},
       list: [],
       discuss: {
         title: '',
-        pid: this.$route.params.id,
+        cid: this.$route.params.id,
         createAt: '',
         content: '',
       },
@@ -147,10 +147,8 @@ export default {
 
 <style lang="scss" scoped>
 .discussArea{
-  height: calc(100vh - 120px - 40px - 40px - 15px);
   width: 100%;
   padding: 0 10px;
-  overflow:auto;
   .md{
     min-height: 150px;
     z-index: 1;

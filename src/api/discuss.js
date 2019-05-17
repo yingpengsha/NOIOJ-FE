@@ -1,6 +1,8 @@
 import request from '@/utils/request';
 
-export function query({ limit, page, problemId }) {
+export function query({
+  limit, page, problemId, courseId,
+}) {
   return request({
     url: '/topic/list',
     method: 'post',
@@ -8,6 +10,7 @@ export function query({ limit, page, problemId }) {
       limit,
       page,
       problemId,
+      courseId,
     },
   });
 }

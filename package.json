@@ -16,9 +16,11 @@
     "mavon-editor": "^2.7.3",
     "monaco-editor": "^0.16.2",
     "nprogress": "^0.2.0",
+    "video.js": "^7.5.4",
     "vue": "^2.6.6",
     "vue-image-crop-upload": "^2.5.0",
     "vue-router": "^3.0.1",
+    "vue-video-player": "^5.0.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

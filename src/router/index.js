@@ -175,6 +175,7 @@ const router = new Router({
           name: 'lessonDetail',
           meta: {
             title: '课程详情',
+            auth: true,
           },
           component: () => import('@/views/lesson/detail.vue'),
         },
@@ -185,6 +186,7 @@ const router = new Router({
       name: 'Video',
       meta: {
         title: '在线学习',
+        auth: true,
       },
       component: () => import('@/views/lesson/video.vue'),
     },

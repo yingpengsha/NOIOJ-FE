@@ -115,7 +115,7 @@ export default {
     .avator{
       padding:0px;
       width: 280px;
-      height: 494px;
+      height: 520px;
       img{
         width: 280px;
         height: 280px;

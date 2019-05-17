@@ -133,15 +133,31 @@
 
     <section id="userStatus">
       <user-card />
+      <el-card class="box-card" :body-style="{ padding: '0px' }" v-if="isLogin">
+        <div class="title">算法统计</div>
+        <div class="detail">
+          <algorithm-statistic :max="algorithmMax" :chartData="classStatistic.slice(0,5)"/>
+        </div>
+      </el-card>
+      <el-card class="box-card" :body-style="{ padding: '0px' }" v-if="isLogin">
+        <div class="title">数据结构统计</div>
+        <div class="detail">
+          <data-struct-statistic :max="structMax" :chartData="classStatistic.slice(5,9)"/>
+        </div>
+      </el-card>
     </section>
   </div>
 </template>
 
 <script>
 import { problemList } from './mixins/problemList';
+import { mapGetters } from 'vuex';
 import * as problem from '@/api/problem';
 import * as tag from '@/api/tag';
 import UserCard from './components/userCard.vue';
+import * as statistic from '@/api/infoStatistic';
+import AlgorithmStatistic from '@/views/user/infoTabs/components/algorithmStatistic.vue';
+import DataStructStatistic from '@/views/user/infoTabs/components/dataStructStatistic.vue';
 
 export default {
   name: 'Problem',
@@ -162,12 +178,37 @@ export default {
         orderBy: null,
       },
       list: [],
+      structMax: 0,
+      algorithmMax: 0,
+      classStatistic: new Array(8).fill(1),
     };
+  },
+  computed: {
+    ...mapGetters([
+      'isLogin',
+    ]),
   },
   components: {
     UserCard,
+    AlgorithmStatistic,
+    DataStructStatistic,
   },
   methods: {
+    getClassStatistic() {
+      let structMax = 0;
+      let algorithmMax = 0;
+      statistic.classList()
+        .then((result) => {
+          result.data.forEach((element) => {
+            this.classStatistic[element.classId] += element.count;
+            algorithmMax = element.classId < 5 && element.count > algorithmMax ? element.count : algorithmMax;
+            structMax = element.classId > 5 && element.count > structMax ? element.count : structMax;
+          });
+          console.log(this.classStatistic.slice(0, 5), this.classStatistic.slice(5, 9));
+          this.structMax = structMax;
+          this.algorithmMax = algorithmMax;
+        });
+    },
     getList() {
       this.listLoading = true;
       problem.query(this.listQuery)
@@ -199,6 +240,9 @@ export default {
   created() {
     this.getTags();
     this.getList();
+    if (this.isLogin) {
+      this.getClassStatistic();
+    }
   },
 };
 </script>
@@ -291,7 +335,16 @@ export default {
   #userStatus{
     width: 360px;
     min-height: 300px;
-
+    .title{
+      background: $black;
+      height: 50px;
+      color:white;
+      line-height: 50px;
+      text-align: center;
+    }
+    .detail{
+      padding: 15px;
+    }
   }
 }
 </style>

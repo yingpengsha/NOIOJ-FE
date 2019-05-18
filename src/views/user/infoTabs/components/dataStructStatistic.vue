@@ -10,7 +10,7 @@ import { resize } from '../mixins/resize';
 require('echarts/theme/macarons');
 
 export default {
-  name: 'AlgorithmAbility',
+  name: 'DataStructStatistic',
   mixins: [resize],
   props: {
     className: {
@@ -64,8 +64,9 @@ export default {
       this.setOptions(this.chartData);
     },
     setOptions() {
-      if (this.max < 5) {
-        this.max = 5;
+      let { max } = this;
+      if (max < 5) {
+        max = 5;
       }
       this.chart.setOption({
         color: ['#67C23A'],
@@ -89,9 +90,9 @@ export default {
             },
           },
           indicator: [
-            { name: '树结构', max: this.max + 1 },
-            { name: '线性结构', max: this.max + 1 },
-            { name: '其他数据结构', max: this.max + 1 },
+            { name: '树结构', max: max + 1 },
+            { name: '线性结构', max: max + 1 },
+            { name: '其他数据结构', max: max + 1 },
           ],
         },
         series: [{

@@ -60,7 +60,7 @@ export default {
         { name: '算法', value: 2 },
       ],
       difficultyList: [
-        { name: '全部', value: null },
+        { name: '全部', value: null, style: 'primary' },
         { name: '入门', value: 0, style: 'info' },
         { name: '初级', value: 1, style: 'success' },
         { name: '中级', value: 2, style: 'warning' },

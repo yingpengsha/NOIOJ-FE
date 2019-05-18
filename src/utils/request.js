@@ -36,11 +36,11 @@ service.interceptors.response.use(
   },
   (error) => {
     console.error(error.response);
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000,
-    });
+    // Message({
+    //   message: error.message,
+    //   type: 'error',
+    //   duration: 5 * 1000,
+    // });
     if (error.response.status) {
       switch (error.response.status) {
         // 401: 未登录/token过期

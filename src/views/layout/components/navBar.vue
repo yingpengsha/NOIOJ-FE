@@ -93,7 +93,7 @@ export default {
           title: '个人信息', divided: false, style: null, method: this.handleToUserInfo,
         },
         {
-          title: '上传题目', divided: true, style: 'color:#0681FF',
+          title: '上传题目', divided: true, style: 'color:#0681FF', method: this.handleToUpload,
         },
         {
           title: '退出登录', divided: true, style: 'color:red', method: this.handleToLogout,
@@ -108,6 +108,9 @@ export default {
     ]),
   },
   methods: {
+    handleToUpload() {
+      this.$router.push({ name: 'problemPackageUpload' });
+    },
     handleToHomepage() {
       this.$router.push({ name: 'homepage' });
     },

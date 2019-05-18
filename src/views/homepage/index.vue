@@ -8,8 +8,8 @@
           <p>并且拥有专业的在线编辑器方便你的学习</p>
           <p>赶快让自己的名字出现在排行榜上吧！</p>
           <div class="buttonList">
-            <el-button type="success" class="button">开始做题</el-button>
-            <div class="button register" @click="handleToRegister">注册加入平台</div>
+            <el-button type="success" class="button"@click="handleToProblem">开始做题</el-button>
+            <div class="button register" @click="handleToRegister" v-if="!isLogin">注册加入平台</div>
           </div>
         </div>
         <img src="@/assets/welcome-page/homepage.png" alt="homepage">
@@ -53,13 +53,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Homepage',
-  methods: {
-    handleToRegister() {
-      this.$router.push({ name: 'register' });
-    },
-  },
   data() {
     return {
       code: {
@@ -79,6 +76,20 @@ export default {
         info: '信奥训练平台提供了丰富的视频教程资源。并且富有交互性和趣味性，你还可以叫上你的小伙伴，让我们一起来编程吧！',
       },
     };
+  },
+  computed: {
+    ...mapGetters([
+      'isLogin',
+      'avator',
+    ]),
+  },
+  methods: {
+    handleToProblem() {
+      this.$router.push({ name: 'problem' });
+    },
+    handleToRegister() {
+      this.$router.push({ name: 'register' });
+    },
   },
 };
 </script>
@@ -120,7 +131,7 @@ export default {
             width: 180px;
             height: 44px;
             margin-left: 15px;
-            background: #ddd;
+            background: white;
             float: right;
             border-radius: 3px;
             text-align: center;

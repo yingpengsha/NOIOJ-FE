@@ -316,27 +316,23 @@ NProgress.configure({
 /**
  * 路由前置检查
  */
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start();
   document.title = `${to.meta.title}_信奥训练平台`;
   // 合法性校验
   if (to.meta.auth && !store.getters.isLogin) {
     next({ name: 'login', params: { history: to.path } });
-  }
-
-  if (to.name === 'login' && !to.params.history) {
+  } else if (to.name === 'login' && !to.params.history) {
     to.params.history = from.path;
     next();
-  }
-
-  if (to.name === 'problemDetail') {
-    problem.isHaveToBuy(to.params.id)
+  } else if (to.name === 'problemDetail') {
+    await problem.isHaveToBuy(to.params.id)
       .then((result) => {
         console.log(result);
         if (result.data.isBuy === 1) {
           next();
         } else {
-          next({ name: 'problemPackageDetail', params: { id: result.packetId } });
+          next({ name: 'problemPackageDetail', params: { id: result.data.packetId } });
           Message({
             message: '请先购买题包！',
             type: 'warning',
@@ -344,8 +340,9 @@ router.beforeEach((to, from, next) => {
           });
         }
       });
+  } else {
+    next();
   }
-  next();
 });
 router.afterEach(() => {
   // 在即将进入新的页面组件前操作

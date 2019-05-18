@@ -64,8 +64,9 @@ export default {
       this.setOptions(this.chartData);
     },
     setOptions() {
-      if (this.max < 5) {
-        this.max = 5;
+      let { max } = this;
+      if (max < 5) {
+        max = 5;
       }
       console.log(this.chartData);
       this.chart.setOption({
@@ -90,11 +91,11 @@ export default {
             },
           },
           indicator: [
-            { name: '搜索/递归/回溯', max: this.max + 1 },
-            { name: '排序', max: this.max + 1 },
-            { name: '数学', max: this.max + 1 },
-            { name: '动态规划', max: this.max + 1 },
-            { name: '其他算法', max: this.max + 1 },
+            { name: '搜索/递归/回溯', max: max + 1 },
+            { name: '排序', max: max + 1 },
+            { name: '数学', max: max + 1 },
+            { name: '动态规划', max: max + 1 },
+            { name: '其他算法', max: max + 1 },
           ],
         },
         series: [{

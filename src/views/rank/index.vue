@@ -39,6 +39,7 @@
             :data="list"
             style="width: 100%"
             stripe
+            :default-sort="{prop:'solved',order:'descending'}"
             >
             <el-table-column
               label="排名"
@@ -80,7 +81,8 @@
             <el-table-column
               label="通过率"
               width="80"
-              align="center">
+              align="center"
+              prop="pass">
               <template slot-scope="scope">
                 {{ scope.row.submit
                 ? Math.floor(scope.row.solved / scope.row.submit * 10000)/100 + '%'

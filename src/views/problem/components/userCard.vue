@@ -8,7 +8,7 @@
       <div class="rank">
         <div>
           <p class="title">AC排名</p>
-          <p class="detail">3981</p>
+          <p class="detail">{{rank}}</p>
         </div>
         <div>
           <p class="title">天梯段位</p>
@@ -71,6 +71,7 @@ export default {
       levelList: ['尚未定级', '青铜', '白银', '黄金', '铂金', '钻石'],
       acChallengeNum: 0,
       levelId: 0,
+      rank: 0,
       loginForm: {
         email: '',
         password: '',
@@ -102,7 +103,7 @@ export default {
     getInfo() {
       user.userInfo()
         .then((result) => {
-          console.log(result);
+          this.rank = result.data.rank;
           this.acChallengeNum = result.data.acChallengeNum;
           this.levelId = result.data.levelId;
         });
@@ -112,7 +113,7 @@ export default {
         if (valid) {
           await this.$store.dispatch('login', this.loginForm);
           if (this.$store.getters.isLogin) {
-            this.$router.push({ path: this.$route.params.history });
+            this.getInfo();
           } else {
             this.isRight = false;
             this.$refs.loginForm.validateField('email');

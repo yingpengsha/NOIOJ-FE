@@ -59,6 +59,38 @@ const router = new Router({
           component: () => import('@/views/package/detail.vue'),
         },
         {
+          path: '/problem/package/update/:id',
+          name: 'problemPackageUpdate',
+          meta: {
+            title: '修改题包',
+          },
+          component: () => import('@/views/package/update.vue'),
+        },
+        {
+          path: '/problem/package/create',
+          name: 'problemAdd',
+          meta: {
+            title: '增加题目',
+          },
+          component: () => import('@/views/package/create.vue'),
+        },
+        {
+          path: '/problem/package/updateProblem',
+          name: 'problemUpdate',
+          meta: {
+            title: '编辑题目',
+          },
+          component: () => import('@/views/package/updateProblem.vue'),
+        },
+        {
+          path: '/problem/package/updatePackage',
+          name: 'packageUpdate',
+          meta: {
+            title: '编辑题包',
+          },
+          component: () => import('@/views/package/updatePackage.vue'),
+        },
+        {
           path: '/problem/package/upload',
           name: 'problemPackageUpload',
           meta: {

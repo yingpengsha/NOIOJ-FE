@@ -41,6 +41,39 @@
         </div>
       </div>
     </div>
+
+    <div class="me" v-if="me">
+      <div class="meTitle">
+          <p>我上传的题包</p>
+        </div>
+      <div class="packageList" v-loading="meLoading" >
+        <div class="package"
+          v-show="item.status !== -1"
+          v-for="(item,key) in meList"
+          :key="key"
+          @click="handleEdit(item.packetId)"
+          >
+          <div class="back">
+            <div class="img" :style="item.image || defaultPackage | backFilter"/>
+            <div class="name">{{item.name}}</div>
+          </div>
+          <div class="items">
+            <div class="item">
+              <p>{{ item.count}} </p>
+              <p>题目</p>
+            </div>
+            <div class="item" v-if="item.status !==-1">
+              <p>{{ meClasses[item.status].display_name}}</p>
+              <p>状态</p>
+            </div>
+            <div class="item">
+              <p>{{item.price || '免费' }}</p>
+              <p>价格</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,14 +93,24 @@ export default {
         userId: null,
         status: 1,
       },
+      meClasses: [
+        { value: 0, display_name: '审核中' },
+        { value: 1, display_name: '已通过' },
+      ],
       defaultPackage,
       packageLoading: false,
+      meLoading: false,
       packageList: [],
+      meList: [],
+      me: false,
     };
   },
   methods: {
     hanldToPackageDetail(id) {
       this.$router.push({ name: 'problemPackageDetail', params: { id } });
+    },
+    handleEdit(id) {
+      this.$router.push({ name: 'problemPackageUpdate', params: { id } });
     },
     handleFilter() {
       this.listQuery.page = 1;
@@ -84,9 +127,23 @@ export default {
           this.packageLoading = false;
         });
     },
+    getMe() {
+      this.meLoading = true;
+      packageAPI.queryMe()
+        .then((result) => {
+          if (result.code === 1) {
+            this.meList = result.data.list;
+            this.me = true;
+            this.meLoading = false;
+          } else {
+            this.me = false;
+          }
+        });
+    },
   },
   created() {
     this.getData();
+    this.getMe();
   },
   filters: {
     backFilter(val) {
@@ -113,8 +170,17 @@ export default {
       font-size: 30px;
     }
   }
+  .meTitle{
+    p{
+      margin:8px;
+      font-size: 30px;
+    }
+  }
   .search{
     margin:20px 0;
+  }
+  .me{
+    margin-top:40px;
   }
   .packageList{
     display: flex;

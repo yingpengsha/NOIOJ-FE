@@ -39,7 +39,6 @@ export function queryById(id) {
 }
 
 export function upload(data) {
-  console.log(data);
   return request({
     url: '/problem',
     method: 'post',

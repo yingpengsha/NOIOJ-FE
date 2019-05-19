@@ -25,6 +25,13 @@ export function query({
   });
 }
 
+export function queryMe() {
+  return request({
+    url: '/packet/me',
+    method: 'get',
+  });
+}
+
 export function queryById(id) {
   return request({
     url: '/packet/detail',
@@ -52,6 +59,7 @@ export function insert({
 }
 
 export function update(data) {
+  console.log(data);
   return request({
     url: '/packet',
     method: 'put',

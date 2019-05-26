@@ -62,6 +62,7 @@ const router = new Router({
           path: '/problem/package/update/:id',
           name: 'problemPackageUpdate',
           meta: {
+            auth: true,
             title: '修改题包',
           },
           component: () => import('@/views/package/update.vue'),
@@ -70,6 +71,7 @@ const router = new Router({
           path: '/problem/package/create',
           name: 'problemAdd',
           meta: {
+            auth: true,
             title: '增加题目',
           },
           component: () => import('@/views/package/create.vue'),
@@ -78,6 +80,7 @@ const router = new Router({
           path: '/problem/package/updateProblem',
           name: 'problemUpdate',
           meta: {
+            auth: true,
             title: '编辑题目',
           },
           component: () => import('@/views/package/updateProblem.vue'),
@@ -86,6 +89,7 @@ const router = new Router({
           path: '/problem/package/updatePackage',
           name: 'packageUpdate',
           meta: {
+            auth: true,
             title: '编辑题包',
           },
           component: () => import('@/views/package/updatePackage.vue'),
@@ -94,6 +98,7 @@ const router = new Router({
           path: '/problem/package/upload',
           name: 'problemPackageUpload',
           meta: {
+            auth: true,
             title: '上传题目',
           },
           component: () => import('@/views/package/upload.vue'),

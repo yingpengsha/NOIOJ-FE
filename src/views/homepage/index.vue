@@ -8,7 +8,7 @@
           <p>并且拥有专业的在线编辑器方便你的学习</p>
           <p>赶快让自己的名字出现在排行榜上吧！</p>
           <div class="buttonList">
-            <el-button type="success" class="button"@click="handleToProblem">开始做题</el-button>
+            <el-button type="success" class="button" @click="handleToProblem">开始做题</el-button>
             <div class="button register" @click="handleToRegister" v-if="!isLogin">注册加入平台</div>
           </div>
         </div>

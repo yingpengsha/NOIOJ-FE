@@ -86,7 +86,7 @@ export default {
         if (valid) {
           await this.$store.dispatch('login', this.loginForm);
           if (this.$store.getters.isLogin) {
-            this.$router.push({ path: this.$route.params.history });
+            this.$router.push({ path: '/' });
           } else {
             this.isRight = false;
             this.$refs.loginForm.validateField('email');

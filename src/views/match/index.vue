@@ -135,7 +135,7 @@ export default {
   },
   methods: {
     indexrank(index) {
-      return index + 3;
+      return index + 4;
     },
     startMatch() {
       match.create()

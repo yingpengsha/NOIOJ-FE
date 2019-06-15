@@ -77,9 +77,9 @@ export default {
     };
   },
   watch: {
-    code() {
-      this.initEditor();
-    },
+    // code() {
+    //   this.initEditor();
+    // },
   },
   methods: {
     onSubmit() {
@@ -125,9 +125,9 @@ export default {
         self.$emit('onCodeChange', self.monacoEditor.getValue(), event);
       });
       // 编辑器随窗口自适应
-      window.addEventListener('resize', () => {
-        this.initEditor();
-      });
+      // window.addEventListener('resize', () => {
+      //   this.initEditor();
+      // });
     },
   },
   mounted() {

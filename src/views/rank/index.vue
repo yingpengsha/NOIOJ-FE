@@ -63,11 +63,11 @@
             <el-table-column
               prop="introduce"
               label="签名"
-              header-align="center">
+              align="center">
             </el-table-column>
             <el-table-column
               prop="solved"
-              label="通过"
+              label="积分"
               width="80"
               align="center">
             </el-table-column>

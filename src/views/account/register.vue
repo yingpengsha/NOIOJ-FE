@@ -85,7 +85,7 @@ export default {
         defunct: 'N',
         volume: '0',
         language: '0',
-        school: '绍兴文理学院',
+        school: '',
       },
       rules: {
         email: [

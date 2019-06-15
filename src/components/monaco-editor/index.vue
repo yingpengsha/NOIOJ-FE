@@ -77,9 +77,9 @@ export default {
     };
   },
   watch: {
-    // code() {
-    //   this.initEditor();
-    // },
+    code() {
+      this.initEditor();
+    },
   },
   methods: {
     onSubmit() {
@@ -113,6 +113,7 @@ export default {
     },
     initEditor() {
       const self = this;
+      self.$refs.container.innerHTML = '';
       self.monacoEditor = monaco.editor.create(self.$refs.container, {
         value: self.codesCopy || self.code,
         language: self.language,
@@ -125,9 +126,9 @@ export default {
         self.$emit('onCodeChange', self.monacoEditor.getValue(), event);
       });
       // 编辑器随窗口自适应
-      // window.addEventListener('resize', () => {
-      //   this.initEditor();
-      // });
+      window.addEventListener('resize', () => {
+        this.initEditor();
+      });
     },
   },
   mounted() {

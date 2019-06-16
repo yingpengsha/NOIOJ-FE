@@ -199,7 +199,7 @@ header{
     display: flex;
     justify-content:space-between;
     .el-dropdown-link{
-      color: #888894;
+      color: white;
       transition: all .3s;
       &:hover{
         cursor: pointer;
@@ -212,7 +212,7 @@ header{
     }
     a{
       font-size: 15px;
-      color:#888894;
+      color:white;
       transition: all .3s;
       &:hover{
         color: white;

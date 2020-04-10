@@ -10,8 +10,8 @@ module.exports = {
     : '/',
 
   // 输出文件目录
-  outputDir: 'dist',
-  assetsDir: 'static', // 静态资源目录
+  outputDir: './dist',
+  assetsDir: './static', // 静态资源目录
 
   // eslint-loader 是否在保存的时候检查
   lintOnSave: true,
@@ -84,7 +84,7 @@ module.exports = {
   // webpack-dev-server 相关配置
   devServer: {
     open: true, // 配置自动启动浏览器
-    port: 8080,
+    port: 8087,
     https: false,
     hotOnly: false,
     proxy: {

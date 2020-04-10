@@ -11,7 +11,7 @@ import { Message } from 'element-ui';
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     {

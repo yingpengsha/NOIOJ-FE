@@ -12,7 +12,7 @@
     "echarts": "^4.1.0",
     "element-ui": "^2.6.1",
     "js-cookie": "^2.2.0",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "mavon-editor": "^2.7.3",
     "monaco-editor": "^0.16.2",
     "nprogress": "^0.2.0",
